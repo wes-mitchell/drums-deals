@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace DrumDeals.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ListingController : ControllerBase
@@ -27,6 +27,16 @@ namespace DrumDeals.Controllers
                 return NotFound();
             }
             return Ok(listings);
+        }
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+            Listing listing = _listingRepository.GetListingById(id);
+            if (listing == null)
+            {
+                return NotFound();
+            }
+            return Ok(listing);
         }
     }
 }
