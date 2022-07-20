@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DrumDeals.Models;
 using DrumDeals.Utils;
 using System.Data;
+using Microsoft.Data.SqlClient;
 
 namespace DrumDeals.Repositories
 {
@@ -167,18 +168,42 @@ namespace DrumDeals.Repositories
             //}
         }
 
-        /*
-        public UserProfile GetByFirebaseUserId(string firebaseUserId)
+        public UserProfile GetByFirebaseId(string id)
         {
-            return _context.UserProfile
-                       .Include(up => up.UserType) 
-                       .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT * FROM UserProfile WHERE FirebaseUserId = @id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        UserProfile userProfile = null;
+
+                        if (reader.Read())
+                        {
+                            userProfile = new UserProfile
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
+                                IsAdmin = reader.GetBoolean(reader.GetOrdinal("IsAdmin"))
+                            };
+                        }
+                        return userProfile;
+                    }
+                }
+            }
         }
-        public void Add(UserProfile userProfile)
-        {
-            _context.Add(userProfile);
-            _context.SaveChanges();
-        }
-        */
+        //public void Add(UserProfile userProfile)
+        //{
+        //    _context.Add(userProfile);
+        //    _context.SaveChanges();
+        //}
+        //*/
     }
 }
