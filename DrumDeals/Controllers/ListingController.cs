@@ -51,5 +51,17 @@ namespace DrumDeals.Controllers
                 new { id = listing.Id },
                 listing);
         }
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Listing listing)
+        {
+            if (id != listing.Id)
+            {
+                return BadRequest();
+            }
+
+            _listingRepository.Update(listing);
+
+            return NoContent();
+        }
     }
 }

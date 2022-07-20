@@ -158,7 +158,36 @@ namespace DrumDeals.Repositories
 
         public void Update(Listing listing)
         {
-            throw new System.NotImplementedException();
+            {
+                using (var conn = Connection)
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+                        UPDATE Listing
+                        SET Title = @Title,
+                            Condition = @Condition, 
+                            Location = @Location,
+                            Description = @Description,
+                            Price = @Price,
+                            CategoryId = @CategoryId,
+                            ImageUrl = @ImageUrl
+                        WHERE Id = @Id";
+
+                        DbUtils.AddParameter(cmd, "@Id", listing.Id);
+                        DbUtils.AddParameter(cmd, "@Title", listing.Title);
+                        DbUtils.AddParameter(cmd, "@Condition", listing.Condition);
+                        DbUtils.AddParameter(cmd, "@Location", listing.Location);
+                        DbUtils.AddParameter(cmd, "@Description", listing.Description);
+                        DbUtils.AddParameter(cmd, "@Price", listing.Price);
+                        DbUtils.AddParameter(cmd, "@CategoryId", listing.CategoryId);
+                        DbUtils.AddParameter(cmd, "@ImageUrl", listing.ImageUrl);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
         }
     }
 }
