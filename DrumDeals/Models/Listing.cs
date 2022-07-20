@@ -15,5 +15,7 @@ namespace DrumDeals.Models
         public DateTime PublishDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string ImageUrl { get; set; }
+        public Category Category { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }

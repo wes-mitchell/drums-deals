@@ -102,46 +102,7 @@ namespace DrumDeals.Repositories
 
         public UserProfile GetByUserId(int id)
         {
-
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                                    SELECT *
-                                    FROM UserProfile
-                                    WHERE up.Id = @Id";
-
-                    DbUtils.AddParameter(cmd, "@Id", id);
-
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        UserProfile userProfile = null;
-
-                        if (reader.Read())
-                        {
-                            userProfile = new UserProfile
-                            {
-                                Id = DbUtils.GetInt(reader, "Id"),
-                                FirstName = DbUtils.GetString(reader, "FirstName"),
-                                LastName = DbUtils.GetString(reader, "LastName"),
-                                Email = DbUtils.GetString(reader, "Email"),
-                                IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
-                                IsAdmin = reader.GetBoolean(reader.GetOrdinal("IsAdmin"))
-                            };
-                        }
-                        return userProfile;
-                    }
-                }
-            }
+            throw new System.NotImplementedException();
         }
-
-        //public void Add(UserProfile userProfile)
-        //{
-        //    _context.Add(userProfile);
-        //    _context.SaveChanges();
-        //}
-        //*/
     }
 }
