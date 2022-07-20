@@ -94,7 +94,22 @@ namespace DrumDeals.Repositories
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        DELETE FROM Listing
+                        WHERE Id = @Id;
+
+                        DELETE FROM UserFavorite
+                        WHERE ListingId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public Listing GetListingById(int id)
@@ -165,15 +180,15 @@ namespace DrumDeals.Repositories
                     using (var cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = @"
-                        UPDATE Listing
-                        SET Title = @Title,
-                            Condition = @Condition, 
-                            Location = @Location,
-                            Description = @Description,
-                            Price = @Price,
-                            CategoryId = @CategoryId,
-                            ImageUrl = @ImageUrl
-                        WHERE Id = @Id";
+                            UPDATE Listing
+                            SET Title = @Title,
+                                Condition = @Condition, 
+                                Location = @Location,
+                                Description = @Description,
+                                Price = @Price,
+                                CategoryId = @CategoryId,
+                                ImageUrl = @ImageUrl
+                            WHERE Id = @Id";
 
                         DbUtils.AddParameter(cmd, "@Id", listing.Id);
                         DbUtils.AddParameter(cmd, "@Title", listing.Title);

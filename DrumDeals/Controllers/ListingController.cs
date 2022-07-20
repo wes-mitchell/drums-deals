@@ -63,5 +63,12 @@ namespace DrumDeals.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _listingRepository.Delete(id);
+            return NoContent();
+        }
     }
 }
