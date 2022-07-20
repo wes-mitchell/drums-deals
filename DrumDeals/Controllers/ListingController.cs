@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System;
 
 namespace DrumDeals.Controllers
 {
@@ -28,6 +29,7 @@ namespace DrumDeals.Controllers
             }
             return Ok(listings);
         }
+
         [HttpGet("{id}")]
         public ActionResult Get(int id)
         {
@@ -37,6 +39,17 @@ namespace DrumDeals.Controllers
                 return NotFound();
             }
             return Ok(listing);
+        }
+        [HttpPost]
+        public IActionResult Post(Listing listing)
+        {
+            listing.PublishDate = DateTime.Now;
+            listing.EndDate = null;
+            _listingRepository.Add(listing);
+            return CreatedAtAction(
+                nameof(Get),
+                new { id = listing.Id },
+                listing);
         }
     }
 }

@@ -67,7 +67,29 @@ namespace DrumDeals.Repositories
 
         public void Add(Listing listing)
         {
-            throw new System.NotImplementedException();
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        INSERT INTO Listing (Title, Condition, UserProfileId, Location, Description, Price, CategoryId, PublishDate,                  EndDate, ImageUrl)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@Title, @Condition, @UserProfileId, @Location, @Description, @Price, @CategoryId, @PublishDate,                                  @EndDate, @ImageUrl)";
+                    DbUtils.AddParameter(cmd, "@Title", listing.Title);
+                    DbUtils.AddParameter(cmd, "@Condition", listing.Condition);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", listing.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@Location", listing.Location);
+                    DbUtils.AddParameter(cmd, "@Description", listing.Description);
+                    DbUtils.AddParameter(cmd, "@Price", listing.Price);
+                    DbUtils.AddParameter(cmd, "@CategoryId", listing.CategoryId);
+                    DbUtils.AddParameter(cmd, "@PublishDate", listing.PublishDate);
+                    DbUtils.AddParameter(cmd, "@EndDate", listing.EndDate);
+                    DbUtils.AddParameter(cmd, "@ImageUrl", listing.ImageUrl);
+
+                    listing.Id = (int)cmd.ExecuteScalar();
+                }
+            }
         }
 
         public void Delete(int id)
