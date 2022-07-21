@@ -50,6 +50,16 @@ namespace DrumDeals.Controllers
             };
             return Ok(listings);
         }
+        [HttpGet("homepage")]
+        public ActionResult GetHomePageListings()
+        {
+            List<Listing> listings = _listingRepository.GetHomePageListings();
+            if (listings.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(listings);
+        }
         [HttpPost]
         public IActionResult Post(Listing listing)
         {
