@@ -73,7 +73,7 @@ namespace DrumDeals.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        INSERT INTO Listing (Title, Condition, UserProfileId, Location, Description, Price, CategoryId, PublishDate,                  EndDate, ImageUrl)
+                                        INSERT INTO Listing (Title, Condition, UserProfileId, Location, Description, Price, CategoryId, PublishDate, EndDate, ImageUrl)
                                         OUTPUT INSERTED.ID
                                         VALUES (@Title, @Condition, @UserProfileId, @Location, @Description, @Price, @CategoryId, @PublishDate,                                  @EndDate, @ImageUrl)";
                     DbUtils.AddParameter(cmd, "@Title", listing.Title);

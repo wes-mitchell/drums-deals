@@ -1,4 +1,6 @@
-﻿namespace DrumDeals.Models
+﻿using System.Collections.Generic;
+
+namespace DrumDeals.Models
 {
     public class UserProfile
     {
