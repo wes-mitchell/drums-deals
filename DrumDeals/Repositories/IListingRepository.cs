@@ -7,6 +7,7 @@ namespace DrumDeals.Repositories
     {
         List<Listing> GetAllListings();
         Listing GetListingById(int id);
+        List<Listing> GetListingsByUserId(int id);
         void Add(Listing listing);
         void Update(Listing listing);
         void Delete(int id);
