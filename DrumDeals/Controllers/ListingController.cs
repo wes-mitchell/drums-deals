@@ -40,6 +40,16 @@ namespace DrumDeals.Controllers
             }
             return Ok(listing);
         }
+        [HttpGet("userlistings/{userId}")]
+        public IActionResult GetUserListings(int userId)
+        {
+            List<Listing> listings = _listingRepository.GetListingsByUserId(userId);
+            if (listings.Count == 0)
+            {
+                return NotFound();
+            };
+            return Ok(listings);
+        }
         [HttpPost]
         public IActionResult Post(Listing listing)
         {
