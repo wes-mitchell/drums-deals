@@ -6,6 +6,6 @@ namespace DrumDeals.Repositories
         {
             void AddFavorite(UserFavorite userFavorite);
             void DeleteFavorite(int id);
-            public List<UserFavorite> GetFavoriteListingsByUserId(int userId);
+            public List<Listing> GetFavoriteListingsByUserId(int userId);
         }
 }
