@@ -33,7 +33,21 @@ namespace DrumDeals.Repositories
 
         public void DeleteFavorite(int id)
         {
-            throw new System.NotImplementedException();
+            using (var conn = Connection)
+            {
+                conn.Open();
+                {
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"
+                                        DELETE FROM UserFavorite
+                                        WHERE Id = @Id";
+                        DbUtils.AddParameter(cmd, "@Id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+            }
         }
 
         public List<UserFavorite> GetFavoriteListingsByUserId(int userId)
