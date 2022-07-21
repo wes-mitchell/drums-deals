@@ -22,9 +22,7 @@ export default function Register() {
       const userProfile = {
         firstName,
         lastName,
-        displayName,
-        imageLocation,
-        email,
+        email
       };
       register(userProfile, password).then(() => navigate("/"));
     }
@@ -50,27 +48,11 @@ export default function Register() {
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="displayName">Display Name</Label>
-          <Input
-            id="displayName"
-            type="text"
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
           <Label for="email">Email</Label>
           <Input
             id="email"
             type="text"
             onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="imageLocation">Profile Image URL</Label>
-          <Input
-            id="imageLocation"
-            type="text"
-            onChange={(e) => setImageLocation(e.target.value)}
           />
         </FormGroup>
         <FormGroup>

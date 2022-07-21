@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
+import { ListingsList } from "./Listings/ListingsList";
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -10,10 +11,8 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/">
           <Route
             index
-            element={isLoggedIn ? <h1>Welcome to Drum Deals</h1> : <Navigate to="/login" />}
+            element={isLoggedIn ? <ListingsList /> : <Navigate to="/login" />}
           />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
 
           <Route path="Listings" >
             <Route index element={<p>Listing Component here</p>} />
@@ -30,6 +29,8 @@ export default function ApplicationViews({ isLoggedIn }) {
           </Route>
 
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
         </Route>
       </Routes>
     </main>
