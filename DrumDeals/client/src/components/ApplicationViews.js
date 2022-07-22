@@ -4,13 +4,14 @@ import Login from "./Login";
 import Register from "./Register";
 import { ListingsList } from "./Listings/ListingsList";
 import { Listing } from "./Listings/Listing.js"
+import { Home } from "./Home";
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
     <main>
       <Routes>
         <Route path="/">
-          <Route index element={isLoggedIn ? <ListingsList /> : <Navigate to="/login" />}
+          <Route index element={isLoggedIn ? <Home isLoggedIn={isLoggedIn} /> : <Navigate to="/login" />}
           />
 
           <Route path="listings" >
