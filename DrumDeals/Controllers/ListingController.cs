@@ -67,6 +67,8 @@ namespace DrumDeals.Controllers
         [HttpPost]
         public IActionResult Post(Listing listing)
         {
+            var currentUser = GetCurrentUserProfile();
+            listing.UserProfileId = currentUser.Id;
             listing.PublishDate = DateTime.Now;
             listing.EndDate = null;
             _listingRepository.Add(listing);

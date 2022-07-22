@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { getCurrentUserListings } from "../../modules/listingsManager";
 import { Listing } from "./Listing";
-import {CardDeck} from "reactstrap"
+import {CardDeck, CardGroup, Card} from "reactstrap"
 
 export const UserListings = ({isLoggedIn}) => {
   const [listings, setListings] = useState([])

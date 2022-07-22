@@ -7,7 +7,7 @@ export const Listing = ({ listing }) => {
 
 
   return (
-    <Card >
+    <Card>
     <p className="text-left px-2">From: {listing.userProfile.firstName}</p>
     <CardBody>
     <div className="content-container">

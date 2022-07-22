@@ -5,6 +5,7 @@ import Register from "./Register";
 import { ListingsList } from "./Listings/ListingsList";
 import { UserListings } from "./Listings/UserListings";
 import { Listing } from "./Listings/Listing.js"
+import { ListingForm } from "./Listings/ListingForm";
 import { Home } from "./Home";
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -20,6 +21,7 @@ export default function ApplicationViews({ isLoggedIn }) {
             <Route path="mylistings" element={<UserListings />} />
             <Route path="details/:id" element={<p>Listing Detials Component</p>} />
             <Route path="edit/:id" element={<p>Edit Form Goes Here</p>} />
+            <Route path="create" element={<ListingForm />} />
           </Route>
 
           <Route path="categories">
