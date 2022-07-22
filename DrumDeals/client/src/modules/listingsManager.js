@@ -78,3 +78,43 @@ export const addListing = (listing) => {
         })
     })
 }
+
+export const getListingById = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                throw new Error(
+                    "An unknown error occurred while trying to retrive the listing."
+                )
+            }
+        })
+    })
+}
+
+export const updateListing = (listing) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${listing.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(listing),
+        }).then((res) => {
+            if (res.ok) {
+
+            } else {
+                throw new Error(
+                    "An unknown error occurred while trying to update the listing."
+                )
+            }
+        })
+    })
+}

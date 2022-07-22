@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { getListingById } from "../../modules/listingsManager";
 import { getAllCategories } from "../../modules/categoryManager";
-import { useNavigate } from "react-router";
-import { addListing } from "../../modules/listingsManager";
-import { Form, FormGroup, Label, Input, Button} from "reactstrap";
+import { Form, FormGroup, Label, Input, Button, Modal} from "reactstrap";
+import { updateListing } from "../../modules/listingsManager";
 
-export const ListingForm = () => {
-  const navigate = useNavigate();
-  const [loading, setIsLoading] = useState(true)
+export const EditListingForm = () => {
+  const navigate = useNavigate()
+  const [loading, setIsLoading] = useState(false)
   const [categories, setCategories] = useState([])
   const [listing, setListing] = useState({
     title: '',
@@ -16,17 +17,18 @@ export const ListingForm = () => {
     price: '',
     categoryId: 0,
     imageUrl: ''
-    }
-  )
+  })
+
+  const { id } = useParams()
 
   const handleFieldChange = (evt) => {
-    const newListing = {...listing}
+    const editedListing = {...listing}
     let selectedVal  = evt.target.value
-    newListing[evt.target.id] = selectedVal
-    setListing(newListing)
+    editedListing[evt.target.id] = selectedVal
+    setListing(editedListing)
   }
 
-  const handleSaveListing = (evt) => {
+  const handleUpdateListing = (evt) => {
     evt.preventDefault();
 
     if (listing.title === '' || listing.condition === '' || listing. location === '' || listing.price === '' || listing.categoryId === "0") {
@@ -36,9 +38,15 @@ export const ListingForm = () => {
       setIsLoading(true)
       listing.categoryId = parseInt(listing.categoryId)
       listing.price = parseFloat(listing.price).toFixed(2)
-      addListing(listing)
+      updateListing(listing)
       .then(() => navigate('/listings/mylistings'))
     }
+  }
+
+  const getListing = () => {
+    getListingById(id)
+    .then(listing => setListing(listing))
+    .then(setIsLoading(false))
   }
 
   const getCategories = () => {
@@ -47,13 +55,17 @@ export const ListingForm = () => {
     .then(setIsLoading(false))
   }
 
-useEffect(() => {
-  getCategories()
-}, [])
+  useEffect(() => {
+    getListing()
+  }, [])
 
-return (
-  <Form>
-    <h3>Create a Listing</h3>
+  useEffect(() => {
+    getCategories()
+  }, [])
+
+  return (
+    <Form>
+    <h3>Update Your Listing</h3>
     <FormGroup>
       <Label for="title">Title</Label>
       <Input type="text" name="title" id="title" onChange={handleFieldChange} value={listing.title} />
@@ -89,7 +101,8 @@ return (
       <Label for="imageUrl">Image URL</Label>
       <Input type="text" name="imageUrl" id="imageUrl" onChange={handleFieldChange} value={listing.imageUrl} />
     </FormGroup>
-    <Button onClick={handleSaveListing} color="success">Save Listing</Button>
+    <Button onClick={handleUpdateListing} color="success">Save Listing</Button>
+    <Button onClick={() => navigate(`/listings/mylistings`)} color="success">Cancel</Button>
   </Form>
   )
 }

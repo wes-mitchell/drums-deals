@@ -6,6 +6,7 @@ import { ListingsList } from "./Listings/ListingsList";
 import { UserListings } from "./Listings/UserListings";
 import { Listing } from "./Listings/Listing.js"
 import { ListingForm } from "./Listings/ListingForm";
+import { EditListingForm } from "./Listings/EditListingForm";
 import { Home } from "./Home";
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -20,7 +21,7 @@ export default function ApplicationViews({ isLoggedIn }) {
             <Route index element={<ListingsList />} />
             <Route path="mylistings" element={<UserListings />} />
             <Route path="details/:id" element={<p>Listing Detials Component</p>} />
-            <Route path="edit/:id" element={<p>Edit Form Goes Here</p>} />
+            <Route path="edit/:id" element={<EditListingForm /> } />
             <Route path="create" element={<ListingForm />} />
           </Route>
 
