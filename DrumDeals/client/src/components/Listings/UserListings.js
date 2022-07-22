@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getAllListings } from "../../modules/listingsManager";
+import { getCurrentUserListings } from "../../modules/listingsManager";
 import { Listing } from "./Listing";
 import {CardDeck} from "reactstrap"
 
-export const ListingsList = ({isLoggedIn}) => {
+export const UserListings = ({isLoggedIn}) => {
   const [listings, setListings] = useState([])
   
   const getListings = () => {
-    getAllListings()
+    getCurrentUserListings()
     .then(listings => setListings(listings))
   }
   
@@ -18,7 +18,7 @@ export const ListingsList = ({isLoggedIn}) => {
   
   return (
     <>
-    <h1>All Listings</h1>
+    <h1>Your Listings</h1>
     <CardDeck>
       {listings.map((listing) => (
         <Listing listing={listing} key={listing.id} />

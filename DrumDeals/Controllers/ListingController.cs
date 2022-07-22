@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System;
+using System.Security.Claims;
 
 namespace DrumDeals.Controllers
 {
@@ -14,9 +15,11 @@ namespace DrumDeals.Controllers
     public class ListingController : ControllerBase
     {
         private readonly IListingRepository _listingRepository;
-        public ListingController(IListingRepository listingRepository)
+        private readonly IUserProfileRepository _userProfileRepository;
+        public ListingController(IListingRepository listingRepository, IUserProfileRepository userProfileRepository)
         {
             _listingRepository = listingRepository;
+            _userProfileRepository = userProfileRepository;
         }
 
         [HttpGet]
@@ -40,10 +43,11 @@ namespace DrumDeals.Controllers
             }
             return Ok(listing);
         }
-        [HttpGet("userlistings/{userId}")]
-        public IActionResult GetUserListings(int userId)
+        [HttpGet("userlistings")]
+        public IActionResult GetUserListings()
         {
-            List<Listing> listings = _listingRepository.GetListingsByUserId(userId);
+            var currentUser = GetCurrentUserProfile();
+            List<Listing> listings = _listingRepository.GetListingsByUserId(currentUser.Id);
             if (listings.Count == 0)
             {
                 return NotFound();
@@ -89,6 +93,11 @@ namespace DrumDeals.Controllers
         {
             _listingRepository.Delete(id);
             return NoContent();
+        }
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
         }
     }
 }
