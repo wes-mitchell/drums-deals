@@ -29,7 +29,7 @@ export const ListingForm = () => {
   const handleSaveListing = (evt) => {
     evt.preventDefault();
 
-    if (listing.title === '' || listing.condtition === '' || listing. location === '' || listing.price === '') {
+    if (listing.title === '' || listing.condition === '' || listing. location === '' || listing.price === '' || listing.categoryId === "0") {
       window.alert("Whoops, make sure you fill out all fields")
       setIsLoading(false)
     } else {

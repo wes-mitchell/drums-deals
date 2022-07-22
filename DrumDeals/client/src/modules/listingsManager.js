@@ -97,3 +97,24 @@ export const getListingById = (id) => {
         })
     })
 }
+
+export const updateListing = (listing) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${listing.id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(listing),
+        }).then((res) => {
+            if (res.ok) {
+
+            } else {
+                throw new Error(
+                    "An unknown error occurred while trying to update the listing."
+                )
+            }
+        })
+    })
+}
