@@ -15,7 +15,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           />
 
           <Route path="listings" >
-            <Route index element={<Listing />} />
+            <Route index element={<ListingsList />} />
             <Route path="mylistings" element={<p>My Listing Component here</p>} />
             <Route path="details/:id" element={<p>Listing Detials Component</p>} />
             <Route path="edit/:id" element={<p>Edit Form Goes Here</p>} />
