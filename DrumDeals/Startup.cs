@@ -32,6 +32,7 @@ namespace DrumDeals
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IListingRepository, ListingRepository>();
             services.AddTransient<IUserFavoriteRepository, UserFavoriteRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
