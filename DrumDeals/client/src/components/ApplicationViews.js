@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import { ListingsList } from "./Listings/ListingsList";
+import { UserListings } from "./Listings/UserListings";
 import { Listing } from "./Listings/Listing.js"
 import { Home } from "./Home";
 
@@ -16,7 +17,7 @@ export default function ApplicationViews({ isLoggedIn }) {
 
           <Route path="listings" >
             <Route index element={<ListingsList />} />
-            <Route path="mylistings" element={<p>My Listing Component here</p>} />
+            <Route path="mylistings" element={<UserListings />} />
             <Route path="details/:id" element={<p>Listing Detials Component</p>} />
             <Route path="edit/:id" element={<p>Edit Form Goes Here</p>} />
           </Route>
