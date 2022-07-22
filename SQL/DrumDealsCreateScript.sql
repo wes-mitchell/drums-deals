@@ -21,7 +21,7 @@ CREATE TABLE [Listing] (
   [UserProfileId] int NOT NULL,
   [Location] nvarchar(255) NOT NULL,
   [Description] nvarchar(255) NOT NULL,
-  [Price] decimal NOT NULL,
+  [Price] decimal(38, 2) NOT NULL,
   [CategoryId] int NOT NULL,
   [PublishDate] datetime NOT NULL,
   [EndDate] datetime,
@@ -34,7 +34,7 @@ CREATE TABLE [UserProfile] (
   [FirstName] nvarchar(255) NOT NULL,
   [LastName] nvarchar(255) NOT NULL,
   [Email] nvarchar(255) NOT NULL,
-  [FirebaseUserId] nvarchar(255) NOT NULL,
+  [FirebaseUserId] nvarchar(28) NOT NULL,
   [IsAdmin] bit NOT NULL,
   [IsActive] bit NOT NULL DEFAULT (1)
 )
