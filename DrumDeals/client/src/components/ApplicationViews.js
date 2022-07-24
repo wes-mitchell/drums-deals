@@ -7,6 +7,7 @@ import { UserListings } from "./Listings/UserListings";
 import { Listing } from "./Listings/Listing.js"
 import { ListingForm } from "./Listings/ListingForm";
 import { EditListingForm } from "./Listings/EditListingForm";
+import { DeleteListing } from "./Listings/DeleteListing";
 import { Home } from "./Home";
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -23,6 +24,7 @@ export default function ApplicationViews({ isLoggedIn }) {
             <Route path="details/:id" element={<p>Listing Detials Component</p>} />
             <Route path="edit/:id" element={<EditListingForm /> } />
             <Route path="create" element={<ListingForm />} />
+            <Route path="delete/:id" element={<DeleteListing /> } />
           </Route>
 
           <Route path="categories">

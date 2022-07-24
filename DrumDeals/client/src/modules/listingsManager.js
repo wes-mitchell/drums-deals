@@ -118,3 +118,25 @@ export const updateListing = (listing) => {
         })
     })
 }
+
+export const deleteListing = (listing) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/${listing.id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(listing)
+        }).then((res) => {
+            if (res.ok) {
+            } else if (res.status === 401) {
+                throw new Error("Unauthorized")
+            } else {
+                throw new Error(
+                    "An unknown error occured while trying to delete."
+                )
+            }
+        })
+    })
+}
