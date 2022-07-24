@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardBody, ButtonGroup } from "reactstrap"
 import { Link } from "react-router-dom";
-import { Button } from "bootstrap";
+import { formatDate } from "../../helpers";
 
 export const Listing = ({ listing }) => {
   
@@ -23,7 +23,7 @@ export const Listing = ({ listing }) => {
     />
       <p><strong>Condition:</strong> {listing.condition}</p>
       <p><strong>Price:</strong> ${listing.price}</p>
-      <p><strong>Listed On:</strong> {listing.publishDate}</p>
+      <p><strong>Listed On:</strong> {formatDate(listing.publishDate)}</p>
       <p>Seller: {listing.userProfile.firstName}</p>
       </div>
       <div>
