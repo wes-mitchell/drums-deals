@@ -91,8 +91,16 @@ namespace DrumDeals.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, Listing listing)
         {
+            UserProfile currentUser = GetCurrentUserProfile();
+
+            if (currentUser.Id != listing.UserProfileId)
+            {
+                return Unauthorized();
+            }
+
+            listing.EndDate = DateTime.Now;
             _listingRepository.Delete(id);
             return NoContent();
         }

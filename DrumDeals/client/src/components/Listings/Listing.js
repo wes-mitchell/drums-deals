@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { Button } from "bootstrap";
 
 export const Listing = ({ listing }) => {
-
-
+  
   return (
     <Card>
     <p className="text-left px-2">From: {listing.userProfile.firstName}</p>
@@ -40,7 +39,7 @@ export const Listing = ({ listing }) => {
       </Link>
       </button>
       <button type="button" className="btn btn-outline-light">
-      <Link to={`/listings/delete/${listing.id}`}>
+      <Link to={`/listings/delete/${listing.id}`} listing={listing}>
         Delete Listing
       </Link>
       </button>
