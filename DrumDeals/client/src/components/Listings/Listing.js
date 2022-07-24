@@ -7,7 +7,6 @@ export const Listing = ({ listing }) => {
   
   return (
     <Card>
-    <p className="text-left px-2">From: {listing.userProfile.firstName}</p>
     <CardBody>
     <div className="content-container">
       <div>
@@ -25,6 +24,7 @@ export const Listing = ({ listing }) => {
       <p><strong>Condition:</strong> {listing.condition}</p>
       <p><strong>Price:</strong> ${listing.price}</p>
       <p><strong>Listed On:</strong> {listing.publishDate}</p>
+      <p>Seller: {listing.userProfile.firstName}</p>
       </div>
       <div>
       <ButtonGroup>
