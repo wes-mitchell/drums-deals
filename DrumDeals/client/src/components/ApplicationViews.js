@@ -8,6 +8,7 @@ import { Listing } from "./Listings/Listing.js"
 import { ListingForm } from "./Listings/ListingForm";
 import { EditListingForm } from "./Listings/EditListingForm";
 import { DeleteListing } from "./Listings/DeleteListing";
+import { ListingDetails } from "./Listings/ListingDetails";
 import { Home } from "./Home";
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -21,7 +22,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           <Route path="listings" >
             <Route index element={<ListingsList />} />
             <Route path="mylistings" element={<UserListings />} />
-            <Route path="details/:id" element={<p>Listing Detials Component</p>} />
+            <Route path="details/:id" element={<ListingDetails />} />
             <Route path="edit/:id" element={<EditListingForm /> } />
             <Route path="create" element={<ListingForm />} />
             <Route path="delete/:id" element={<DeleteListing /> } />
