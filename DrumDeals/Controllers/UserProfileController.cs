@@ -32,6 +32,14 @@ namespace DrumDeals.Controllers
             }
             return Ok();
         }
+        [HttpGet("getcurrentuser")]
+        public IActionResult GetCurrentUserId()
+        {
+            UserProfile user = GetCurrentUserProfile();
+            user.FirebaseUserId = "You not allowed";
+            return Ok(user);
+        }
+        
 
         [HttpGet]
         public ActionResult Get()

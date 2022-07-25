@@ -1,17 +1,49 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import { Card, CardBody, ButtonGroup } from "reactstrap"
+import { getFavoritesByListingId } from "../../modules/favoritesManager";
+import { getCurrentUser } from "../../modules/userProfileManager";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../helpers";
 
-export const Listing = ({ listing }) => {
-  
+export const Listing = ({ listing, user, userFavorites }) => {
+
+  const displayFavorite = () => {
+    if (userFavorites.find(fav => fav.listingId === listing.id)) {
+      return (
+        <div>
+          <i class="fa-solid fa-star"></i>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <i class="fa-regular fa-star"></i>
+        </div>
+      );
+    }
+  };
+
+
+//  const handleFavoriteClick = () => {
+//     if (favoriteCheck() === true) {
+//       setFavorited(true)
+//     }
+//   }
+
+//   useEffect(() => {
+//     getFavorites()
+//     handleFavoriteClick()
+//   }, [])
+
   return (
     <Card>
     <CardBody>
+      { displayFavorite() }
     <div className="content-container">
       <div>
       <p>
-        <Link to={`/details/${listing.id}`}>
+        <Link to={`/listings/details/${listing.id}`}>
         <strong>{listing.title}</strong>
         </Link>
       </p>
@@ -24,7 +56,7 @@ export const Listing = ({ listing }) => {
       <p><strong>Condition:</strong> {listing.condition}</p>
       <p><strong>Price:</strong> ${listing.price}</p>
       <p><strong>Listed On:</strong> {formatDate(listing.publishDate)}</p>
-      <p>Seller: {listing.userProfile.firstName}</p>
+      <p><strong>Seller:</strong> {listing.userProfile.firstName}</p>
       </div>
       <div>
       <ButtonGroup>

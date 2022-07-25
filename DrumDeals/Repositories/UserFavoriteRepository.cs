@@ -31,6 +31,65 @@ namespace DrumDeals.Repositories
             }
         }
 
+        public List<UserFavorite> GetFavoritesByListingId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT * FROM UserFavorite WHERE ListingId = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        List<UserFavorite> favorites = new List<UserFavorite>();
+                        while (reader.Read())
+                        {
+                            UserFavorite favorite = new UserFavorite
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                ListingId = DbUtils.GetInt(reader, "ListingId"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                            };
+                            favorites.Add(favorite);
+                        }
+                        return favorites;
+                    }
+                }
+            }
+        }
+        public List<UserFavorite> GetFavoritesByUserId(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT * FROM UserFavorite WHERE UserProfileId = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        List<UserFavorite> favorites = new List<UserFavorite>();
+                        while (reader.Read())
+                        {
+                            UserFavorite favorite = new UserFavorite
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                ListingId = DbUtils.GetInt(reader, "ListingId"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId")
+                            };
+                            favorites.Add(favorite);
+                        }
+                        return favorites;
+                    }
+                }
+            }
+        }
+
         public void DeleteFavorite(int id)
         {
             using (var conn = Connection)
