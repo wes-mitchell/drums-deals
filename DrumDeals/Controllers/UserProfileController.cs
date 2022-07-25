@@ -50,24 +50,6 @@ namespace DrumDeals.Controllers
                 new { firebaseUserId = userProfile.FirebaseUserId },
                 userProfile);
         }
-        [HttpGet("userCheck/{userId}")]
-        public IActionResult UserCheck(int userId)
-        {
-            UserProfile currentUser = GetCurrentUserProfile();
-            if (currentUser.Id != userId)
-            {
-                return Unauthorized();
-            }
-            return Ok();
-        }
-        [HttpGet("GetCurrentUserInfo")]
-        public IActionResult CurrentUser()
-        {
-            UserProfile currentUser = GetCurrentUserProfile();
-            currentUser.FirebaseUserId = "nope, you can't see dis.";
-            return Ok(currentUser);
-        }
-
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;

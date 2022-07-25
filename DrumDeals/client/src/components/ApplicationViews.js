@@ -11,18 +11,18 @@ import { DeleteListing } from "./Listings/DeleteListing";
 import { ListingDetails } from "./Listings/ListingDetails";
 import { Home } from "./Home";
 
-export default function ApplicationViews({ isLoggedIn, user }) {
+export default function ApplicationViews({ isLoggedIn }) {
   return (
     <main>
       <Routes>
         <Route path="/">
-          <Route index element={isLoggedIn ? <Home isLoggedIn={isLoggedIn} user={user}/> : <Navigate to="/login" />}
+          <Route index element={isLoggedIn ? <Home isLoggedIn={isLoggedIn} /> : <Navigate to="/login" />}
           />
 
           <Route path="listings" >
             <Route index element={<ListingsList />} />
             <Route path="mylistings" element={<UserListings />} />
-            <Route path="details/:id" element={<ListingDetails user={user}/>} />
+            <Route path="details/:id" element={<ListingDetails />} />
             <Route path="edit/:id" element={<EditListingForm /> } />
             <Route path="create" element={<ListingForm />} />
             <Route path="delete/:id" element={<DeleteListing /> } />
