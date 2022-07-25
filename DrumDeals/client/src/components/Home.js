@@ -4,7 +4,7 @@ import { Listing } from "./Listings/Listing";
 import { getHomeListings } from "../modules/listingsManager";
 
 
-export const Home = ({isLoggedIn}) => {
+export const Home = ({isLoggedIn, user}) => {
 const [listings, setListings] = useState([])
 
 const getListings = () => {
@@ -21,7 +21,7 @@ return (
   <h1>Home Page View!</h1>
   <CardDeck>
     {listings.map((listing) => (
-      <Listing listing={listing} key={listing.id} />
+      <Listing listing={listing} key={listing.id} user={user}/>
     ))}
   </CardDeck>
   </>

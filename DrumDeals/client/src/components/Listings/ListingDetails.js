@@ -2,10 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getListingById } from "../../modules/listingsManager";
+import { currentUserCheck } from "../../modules/userProfileManager";
 import { Card, CardBody, Container, Row, Col, CardTitle, ListGroup, ListGroupItem, Button } from "reactstrap"
 import { formatDate } from "../../helpers";
 
-export const ListingDetails = () => {
+export const ListingDetails = ({user}) => {
   const navigate = useNavigate()
   const { id } = useParams()
   const [isLoading, setIsLoading] = useState(true)
@@ -22,6 +23,10 @@ export const ListingDetails = () => {
     category: {
       id: 0,
       name: ''
+    },
+    userProfile: {
+      id: '',
+      firstName: ''
     }
   }
 )
@@ -64,7 +69,7 @@ export const ListingDetails = () => {
                 <strong>Price:</strong> ${listing.price} 
                 </ListGroupItem>
                 <ListGroupItem>
-                <strong>Listed On:</strong> {formatDate(listing.publishDate)} 
+                <strong>Listed On:</strong> {formatDate(listing.publishDate)} <strong>By:</strong> {listing.userProfile.firstName} 
                 </ListGroupItem>
               </ListGroup>
             </CardBody>
@@ -78,8 +83,8 @@ export const ListingDetails = () => {
           </Card>
           <Card>
             <CardBody className="details-buttons">
-              <Button type='button' onClick={() => navigate(`/listings/edit/${id}`)}>Update Listing</Button>
-              <Button type='button' onClick={() => navigate(`/listings/delete/${id}`)}>Delete Listing</Button>
+              {listing.userProfile.id === user.id ? <Button type='button' onClick={() => navigate(`/listings/edit/${id}`)}>Update Listing</Button> : '' }
+              {listing.userProfile.id === user.id ? <Button type='button' onClick={() => navigate(`/listings/delete/${id}`)}>Delete Listing</Button> : '' }
             </CardBody>
           </Card>
         </Col>
