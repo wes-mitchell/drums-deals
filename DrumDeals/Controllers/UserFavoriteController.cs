@@ -27,6 +27,17 @@ namespace DrumDeals.Controllers
             _userFavoriteRepository.AddFavorite(userFavorite);
             return Ok();
         }
+        [HttpGet("listing/{id}")]
+        public IActionResult GetListingFavorites(int id)
+        {
+            return Ok(_userFavoriteRepository.GetFavoritesByListingId(id));
+        }
+        [HttpGet("favorites")]
+        public IActionResult GetUserFavs()
+        {
+            UserProfile user = GetCurrentUserProfile();
+            return Ok(_userFavoriteRepository.GetFavoritesByUserId(user.Id));
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

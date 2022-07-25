@@ -20,12 +20,12 @@ export default function ApplicationViews({ isLoggedIn }) {
           />
 
           <Route path="listings" >
-            <Route index element={<ListingsList />} />
-            <Route path="mylistings" element={<UserListings />} />
-            <Route path="details/:id" element={<ListingDetails />} />
-            <Route path="edit/:id" element={<EditListingForm /> } />
-            <Route path="create" element={<ListingForm />} />
-            <Route path="delete/:id" element={<DeleteListing /> } />
+            <Route index element={ isLoggedIn ? <ListingsList isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/> } />
+            <Route path="mylistings" element={ isLoggedIn ? <UserListings isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/>} />
+            <Route path="details/:id" element={ isLoggedIn ? <ListingDetails isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/>} />
+            <Route path="edit/:id" element={ isLoggedIn ? <EditListingForm isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/>} />
+            <Route path="create" element={ isLoggedIn ? <ListingForm isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/>} />
+            <Route path="delete/:id" element={isLoggedIn ? <DeleteListing isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/>} />
           </Route>
 
           <Route path="categories">
