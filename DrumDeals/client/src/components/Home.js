@@ -9,7 +9,7 @@ import { getAllUserFavorites } from "../modules/favoritesManager";
 export const Home = ({isLoggedIn}) => {
 const [listings, setListings] = useState([])
 const [userFavorites, setUserFavorites] = useState([])
-const [favorited, setFavorited] = useState(null)
+const [render, setRender] = useState(1)
 const [user, setUser] = useState({
   id: '',
   firstName: ''
@@ -34,14 +34,14 @@ useEffect(() => {
   getListings()
   getUser()
   getFavorites()
-}, [favorited])
+}, [render])
 
 return (
   <>
   <h1>Home Page View!</h1>
   <CardDeck>
     {listings.map((listing) => (
-      <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} favorited={favorited} setFavorited={setFavorited} />
+      <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} render={render} setRender={setRender} />
     ))}
   </CardDeck>
   </>

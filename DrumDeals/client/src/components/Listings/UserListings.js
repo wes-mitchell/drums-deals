@@ -7,7 +7,7 @@ import { Listing } from "./Listing";
 import {CardDeck, Button, CardGroup, Card} from "reactstrap"
 import { useNavigate } from "react-router-dom";
 
-export const UserListings = ({isLoggedIn}) => {
+export const UserListings = () => {
   const navigate = useNavigate()
   const [listings, setListings] = useState([])
   const [userFavorites, setUserFavorites] = useState([])

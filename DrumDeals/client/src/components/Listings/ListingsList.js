@@ -7,10 +7,11 @@ import { Listing } from "./Listing";
 import { getAllUserFavorites } from "../../modules/favoritesManager";
 import {CardDeck, CardGroup, Button} from "reactstrap"
 
-export const ListingsList = ({isLoggedIn}) => {
+export const ListingsList = () => {
   const navigate = useNavigate()
   const [userFavorites, setUserFavorites] = useState([])
   const [listings, setListings] = useState([])
+  const [render, setRender] = useState(1)
   const [user, setUser] = useState({
     id: '',
     firstName: ''
@@ -35,7 +36,7 @@ const getFavorites = () => {
     getListings()
     getUser()
     getFavorites()
-  }, [])
+  }, [render])
   
   return (
     <>
@@ -43,7 +44,7 @@ const getFavorites = () => {
     <Button type="button" onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
     <CardDeck>
       {listings.map((listing) => (
-        <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites}/>
+        <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} render={render} setRender={setRender} />
       ))}
     </CardDeck>
     </>
