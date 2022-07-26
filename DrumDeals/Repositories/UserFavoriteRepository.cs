@@ -90,7 +90,7 @@ namespace DrumDeals.Repositories
             }
         }
 
-        public void DeleteFavorite(int id)
+        public void DeleteFavorite(int listingId, int userId)
         {
             using (var conn = Connection)
             {
@@ -100,8 +100,9 @@ namespace DrumDeals.Repositories
                     {
                         cmd.CommandText = @"
                                         DELETE FROM UserFavorite
-                                        WHERE Id = @Id";
-                        DbUtils.AddParameter(cmd, "@Id", id);
+                                        WHERE ListingId = @listingId AND UserProfileId = @userId";
+                        DbUtils.AddParameter(cmd, "@listingId", listingId);
+                        DbUtils.AddParameter(cmd, "@userId", userId);
                         cmd.ExecuteNonQuery();
                     }
                 }

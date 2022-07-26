@@ -39,10 +39,11 @@ namespace DrumDeals.Controllers
             return Ok(_userFavoriteRepository.GetFavoritesByUserId(user.Id));
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{listingId}")]
+        public IActionResult Delete(int listingId)
         {
-            _userFavoriteRepository.DeleteFavorite(id);
+            UserProfile user = GetCurrentUserProfile();
+            _userFavoriteRepository.DeleteFavorite(listingId, user.Id);
             return NoContent();
         }
         [HttpGet("{userId}")]
