@@ -140,3 +140,22 @@ export const deleteListing = (listing) => {
         })
     })
 }
+
+export const getFavoriteListings = () => {
+    return getToken().then((token) => {
+        return fetch(`/api/UserFavorite/favoritelistings`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then((res) => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                throw new Error(
+                    "An unknown error occurred while trying to retrive the listings."
+                )
+            }
+        })
+    })
+}

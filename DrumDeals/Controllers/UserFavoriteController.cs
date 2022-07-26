@@ -46,10 +46,11 @@ namespace DrumDeals.Controllers
             _userFavoriteRepository.DeleteFavorite(listingId, user.Id);
             return NoContent();
         }
-        [HttpGet("{userId}")]
-        public IActionResult Get(int userId)
+        [HttpGet("favoritelistings")]
+        public IActionResult Get()
         {
-            List<Listing> listings = _userFavoriteRepository.GetFavoriteListingsByUserId(userId);
+            UserProfile user = GetCurrentUserProfile();
+            List<Listing> listings = _userFavoriteRepository.GetFavoriteListingsByUserId(user.Id);
             if (listings.Count == 0)
             {
                 return NotFound();
