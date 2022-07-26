@@ -7,8 +7,7 @@ import { formatDate } from "../../helpers";
 import './Listing.css'
 
 
-export const Listing = ({ listing, user, userFavorites, favorited, setFavorited }) => {
-const [hover, setHover] = useState()
+export const Listing = ({ listing, user, userFavorites, render, setRender }) => {
 
 const handleAddFavorite = (evt) => {
   evt.preventDefault()
@@ -17,11 +16,13 @@ const handleAddFavorite = (evt) => {
     listingId: listing.id
   }
   addFavorite(userFavorite)
+  .then(() => setRender(render + 1))
 }
 
 const handleDeleteFavorite = (evt) => {
   evt.preventDefault()
   deleteFavorite(listing.id)
+  .then(() => setRender(render + 2))
 }
 
 
@@ -34,13 +35,13 @@ const displayFavorite = () => {
   else if (userFavorites.find(fav => fav.listingId === listing.id)) {
     return (
       <div>
-        <i class="fa-solid fa-star" onClick={handleDeleteFavorite}></i>
+        <i className="fa-solid fa-star" onClick={handleDeleteFavorite}></i>
       </div>
     );
   } else {
     return (
       <div>
-        <i class="fa-regular fa-star" onClick={handleAddFavorite}></i>
+        <i className="fa-regular fa-star" onClick={handleAddFavorite}></i>
       </div>
     );
   }
@@ -72,7 +73,7 @@ const displayFavorite = () => {
       </div>
       <div>
       <ButtonGroup>
-        <button type="button" class="btn btn-outline-light">
+        <button type="button" className="btn btn-outline-light">
           <Link to={`/listings/details/${listing.id}`}>
             See Details
           </Link>
