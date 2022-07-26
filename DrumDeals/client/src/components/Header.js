@@ -24,17 +24,22 @@ export const Header = ({ isLoggedIn }) => {
             }
           </Nav>
           <Nav className="mr-auto" navbar>
-            { /* When isLoggedIn === true, we will render the Home link */}
             {isLoggedIn &&
               <NavItem>
                 <NavLink tag={RRNavLink} to="/listings">All Listings</NavLink>
               </NavItem>
             }
           <Nav className="mr-auto" navbar>
-            { /* When isLoggedIn === true, we will render the Home link */}
             {isLoggedIn &&
               <NavItem>
                 <NavLink tag={RRNavLink} to="/listings/mylistings">My Listings</NavLink>
+              </NavItem>
+            }
+          </Nav>
+          <Nav className="mr-auto" navbar>
+            {isLoggedIn &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/listings/favorites">View Favorites</NavLink>
               </NavItem>
             }
           </Nav>

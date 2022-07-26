@@ -4,11 +4,11 @@ import Login from "./Login";
 import Register from "./Register";
 import { ListingsList } from "./Listings/ListingsList";
 import { UserListings } from "./Listings/UserListings";
-import { Listing } from "./Listings/Listing.js"
 import { ListingForm } from "./Listings/ListingForm";
 import { EditListingForm } from "./Listings/EditListingForm";
 import { DeleteListing } from "./Listings/DeleteListing";
 import { ListingDetails } from "./Listings/ListingDetails";
+import { FavoriteListings } from "./Listings/FavoriteListings";
 import { Home } from "./Home";
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -26,6 +26,7 @@ export default function ApplicationViews({ isLoggedIn }) {
             <Route path="edit/:id" element={ isLoggedIn ? <EditListingForm isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/>} />
             <Route path="create" element={ isLoggedIn ? <ListingForm isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/>} />
             <Route path="delete/:id" element={isLoggedIn ? <DeleteListing isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/>} />
+            <Route path="favorites" element={isLoggedIn ? <FavoriteListings isLoggedIn={isLoggedIn} /> : <Navigate to="/login"/>} />
           </Route>
 
           <Route path="categories">
