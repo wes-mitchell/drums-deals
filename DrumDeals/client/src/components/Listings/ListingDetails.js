@@ -2,13 +2,17 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getListingById } from "../../modules/listingsManager";
+import { getCurrentUser } from "../../modules/userProfileManager";
 import { Card, CardBody, Container, Row, Col, CardTitle, ListGroup, ListGroupItem, Button } from "reactstrap"
 import { formatDate } from "../../helpers";
 
 export const ListingDetails = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const [isLoading, setIsLoading] = useState(true)
+  const [user, setUser] = useState({
+    id: '',
+    firstName: ''
+  })
   const [listing, setListing] = useState({
     id: id,
     title: '',
@@ -26,15 +30,20 @@ export const ListingDetails = () => {
   }
 )
 
-  const getListing = () => {
-    getListingById(id)
-      .then(listing => setListing(listing))
-      .then(() => setIsLoading(false))
-  }
+const getUser = () => {
+  getCurrentUser()
+  .then(user => setUser(user))
+}
 
-  useEffect(() => {
-    getListing()
-  }, [])
+const getListing = () => {
+  getListingById(id)
+    .then(listing => setListing(listing))
+}
+
+useEffect(() => {
+  getListing()
+  getUser()
+}, [])
 
   return (
     <Container fluid>
@@ -76,12 +85,13 @@ export const ListingDetails = () => {
               {listing.description}
             </CardBody>
           </Card>
+          {user.id === listing.userProfileId ?
           <Card>
             <CardBody className="details-buttons">
               <Button type='button' onClick={() => navigate(`/listings/edit/${id}`)}>Update Listing</Button>
               <Button type='button' onClick={() => navigate(`/listings/delete/${id}`)}>Delete Listing</Button>
             </CardBody>
-          </Card>
+          </Card> : ''}
         </Col>
       </Row>
     </Container>

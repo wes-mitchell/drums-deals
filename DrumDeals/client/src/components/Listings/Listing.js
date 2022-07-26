@@ -1,40 +1,52 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Card, CardBody, ButtonGroup } from "reactstrap"
-import { getFavoritesByListingId } from "../../modules/favoritesManager";
-import { getCurrentUser } from "../../modules/userProfileManager";
 import { Link } from "react-router-dom";
+import { addFavorite, deleteFavorite } from "../../modules/favoritesManager";
 import { formatDate } from "../../helpers";
-
-export const Listing = ({ listing, user, userFavorites }) => {
-
-  const displayFavorite = () => {
-    if (userFavorites.find(fav => fav.listingId === listing.id)) {
-      return (
-        <div>
-          <i class="fa-solid fa-star"></i>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <i class="fa-regular fa-star"></i>
-        </div>
-      );
-    }
-  };
+import './Listing.css'
 
 
-//  const handleFavoriteClick = () => {
-//     if (favoriteCheck() === true) {
-//       setFavorited(true)
-//     }
-//   }
+export const Listing = ({ listing, user, userFavorites, favorited, setFavorited }) => {
+const [hover, setHover] = useState()
 
-//   useEffect(() => {
-//     getFavorites()
-//     handleFavoriteClick()
-//   }, [])
+const handleAddFavorite = (evt) => {
+  evt.preventDefault()
+  const userFavorite = {
+    userProfileId: user.id,
+    listingId: listing.id
+  }
+  addFavorite(userFavorite)
+}
+
+const handleDeleteFavorite = (evt) => {
+  evt.preventDefault()
+  deleteFavorite(listing.id)
+}
+
+
+const displayFavorite = () => {
+  if (user.id === listing.userProfileId) {
+    return (
+      <p></p>
+    )
+  }
+  else if (userFavorites.find(fav => fav.listingId === listing.id)) {
+    return (
+      <div>
+        <i class="fa-solid fa-star" onClick={handleDeleteFavorite}></i>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <i class="fa-regular fa-star" onClick={handleAddFavorite}></i>
+      </div>
+    );
+  }
+};
+
+
 
   return (
     <Card>
@@ -65,16 +77,19 @@ export const Listing = ({ listing, user, userFavorites }) => {
             See Details
           </Link>
         </button>
-        <button type="button" className="btn btn-outline-light">
-      <Link className="edit-button" to={`/listings/edit/${listing.id}`}>
-        Edit
-      </Link>
-      </button>
-      <button type="button" className="btn btn-outline-light">
-      <Link to={`/listings/delete/${listing.id}`} listing={listing}>
-        Delete Listing
-      </Link>
-      </button>
+        { (user.id === listing.userProfileId) ? 
+        <>
+          <button type="button" className="btn btn-outline-light">
+            <Link className="edit-button" to={`/listings/edit/${listing.id}`}>
+              Edit
+            </Link>
+          </button>
+          <button type="button" className="btn btn-outline-light">
+            <Link to={`/listings/delete/${listing.id}`} listing={listing}>
+              Delete Listing
+            </Link>
+          </button> 
+        </> : '' }
       </ButtonGroup>
       </div>
       </div>
