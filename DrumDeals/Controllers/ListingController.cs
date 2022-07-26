@@ -104,6 +104,12 @@ namespace DrumDeals.Controllers
             _listingRepository.Delete(id);
             return NoContent();
         }
+
+        [HttpGet("search")]
+        public IActionResult Search(string q)
+        {
+            return Ok(_listingRepository.Search(q));
+        }
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
