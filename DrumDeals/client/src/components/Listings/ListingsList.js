@@ -6,7 +6,7 @@ import { getCurrentUser } from "../../modules/userProfileManager";
 import { Listing } from "./Listing";
 import { getAllUserFavorites } from "../../modules/favoritesManager";
 import { searchListingsByTitle } from "../../modules/listingsManager";
-import {CardDeck, CardGroup, Button} from "reactstrap"
+import {CardDeck, CardGroup, Button, Row} from "reactstrap"
 
 export const ListingsList = () => {
   const navigate = useNavigate()
@@ -50,15 +50,17 @@ const handleFieldChange = (evt) => {
   
   return (
     <>
-    <h1>Current Listings</h1>
-    <h3>Search For a Video</h3>
-    <input type="text" className="search" onChange={handleFieldChange}/> <br/>
-    <Button type="button" onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
-    <CardDeck>
+    <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column'}}>
+      <h1>Current Listings</h1>
+      <h3>Search For a Video</h3>
+      <input type="text" className="search" onChange={handleFieldChange}/> <br/>
+    </div>
+    <Button className="mb-3" type="button" onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
+    <Row>
       {listings.map((listing) => (
         <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} render={render} setRender={setRender} />
       ))}
-    </CardDeck>
+    </Row>
     </>
     )
   }

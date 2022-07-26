@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getCurrentUser } from "../../modules/userProfileManager";
 import { getFavoriteListings } from "../../modules/listingsManager";
 import { getAllUserFavorites } from "../../modules/favoritesManager";
-import {CardDeck} from "reactstrap"
+import { Row } from "reactstrap"
 import { Listing } from "./Listing";
 
 export const FavoriteListings = () => {
@@ -38,11 +38,11 @@ useEffect(() => {
   return (
     <>
     <h1>Yo favs yo!</h1>
-    <CardDeck>
+    <Row>
       {listings.map((listing) => (
         <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} render={render} setRender={setRender} />
       ))}
-    </CardDeck>
+    </Row>
     </>
   )
 }

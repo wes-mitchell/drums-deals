@@ -60,7 +60,7 @@ const displayFavorite = () => {
           </CardTitle>
         </CardHeader>
 
-        <CardImg alt="listing thumbnail" src={listing.imageUrl} style={{width: '100%'}} />
+          <CardImg alt="listing thumbnail" src={listing.imageUrl} style={{width: '100%'}} />
 
         </CardBody>
         
