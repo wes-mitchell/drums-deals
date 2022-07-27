@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllCategories } from "../../modules/categoryManager";
 import { useNavigate } from "react-router";
 import { addListing } from "../../modules/listingsManager";
-import { Form, FormGroup, Label, Input, Button} from "reactstrap";
+import { Form, FormGroup, Label, Input, Button, Container} from "reactstrap";
 
 export const ListingForm = () => {
   const navigate = useNavigate();
@@ -52,20 +52,25 @@ useEffect(() => {
 }, [])
 
 return (
-  <div style={{display: 'flex', justifyContent: "center", border: '1px' }}>
-  <Form className="w-50">
-    <h3>Create a Listing</h3>
+  <Container style={{maxWidth: "25rem"}}>
+    <Form className="m-1">
+      <Container className="text-center">
+        <h3>Create a Listing</h3>
+      </Container>
     <FormGroup>
       <Label for="title">Title</Label>
       <Input bsSize="sm" type="text" name="title" id="title" onChange={handleFieldChange} value={listing.title} />
     </FormGroup>
     <FormGroup>
-      <Label for="condition">Condition</Label>
-      <Input bsSize="sm" type="text" name="condition" id="condition" onChange={handleFieldChange} value={listing.condition}/>
+      <Label for="descripion">Description</Label>
+      <Input bsSize="sm" type="textarea" name="description" id="description" onChange={handleFieldChange} value={listing.description}/>
     </FormGroup>
     <FormGroup>
+      <Label for="imageUrl">Image URL</Label>
+      <Input bsSize="sm" type="text" name="imageUrl" id="imageUrl" onChange={handleFieldChange} value={listing.imageUrl} />
+    </FormGroup>
       <Label for="Category">Category</Label>
-      <Input bsSize="sm" type="select" name="description" id="categoryId" onChange={handleFieldChange} value={listing.categoryId} data-dropup-auto="false">
+      <Input style={{maxWidth: "10rem"}} bsSize="sm" type="select" name="description" id="categoryId" onChange={handleFieldChange} value={listing.categoryId} data-dropup-auto="false">
       <option value="0">Select a Category</option>
       {categories.map(cat => (
         <option value={cat.id} key={cat.id}>
@@ -73,25 +78,22 @@ return (
         </option>
       ))}
       </Input>
+    <FormGroup>
+      <Label for="condition">Condition</Label>
+      <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="condition" id="condition" onChange={handleFieldChange} value={listing.condition}/>
+    </FormGroup>
+    <FormGroup>
     </FormGroup>
     <FormGroup>
       <Label for="location">Location</Label>
-      <Input bsSize="sm" type="text" name="location" id="location" onChange={handleFieldChange} value={listing.location}/>
-    </FormGroup>
-    <FormGroup>
-      <Label for="descripion">Description</Label>
-      <Input bsSize="sm" type="textarea" name="description" id="description" onChange={handleFieldChange} value={listing.description}/>
+      <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="location" id="location" onChange={handleFieldChange} value={listing.location}/>
     </FormGroup>
     <FormGroup>
       <Label for="price">Price</Label>
-      <Input bsSize="sm" type="text" name="price" id="price" onChange={handleFieldChange} value={listing.price} placeholder="$ 00.00" maxLength={8} />
+      <Input style={{maxWidth: "5rem"}} bsSize="sm" type="text" name="price" id="price" onChange={handleFieldChange} value={listing.price} placeholder="$ 00.00" maxLength={8} />
     </FormGroup>
-    <FormGroup>
-      <Label for="imageUrl">Image URL</Label>
-      <Input bsSize="sm" type="text" name="imageUrl" id="imageUrl" onChange={handleFieldChange} value={listing.imageUrl} />
-    </FormGroup>
-    <Button onClick={handleSaveListing} color="success">Save Listing</Button>
+    <Button onClick={handleSaveListing} color="primary">Save Listing</Button>
   </Form>
-  </div>
+  </Container>
   )
 }

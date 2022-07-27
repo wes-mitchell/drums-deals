@@ -53,7 +53,7 @@ const handleFieldChange = (evt) => {
       <Container className="m-1">
         <Container className="text-center">
           <h1>Current Listings</h1>
-          <h3>Search For a Video</h3>
+          <h3>Search For a Listing</h3>
           <input type="text" className="search" onChange={handleFieldChange}/><br/>
         </Container>
 
