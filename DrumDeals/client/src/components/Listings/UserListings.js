@@ -40,7 +40,7 @@ export const UserListings = () => {
   return (
     <>
     <h1>Your Listings</h1>
-    <Button type="button" onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
+    <Button className="mb-3" type="button" onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
     <Row>
       {listings.map((listing) => (
         <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites}/>

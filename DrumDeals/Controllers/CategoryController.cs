@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using DrumDeals.Repositories;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DrumDeals.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase

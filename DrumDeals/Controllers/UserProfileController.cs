@@ -4,9 +4,11 @@ using System;
 using System.Security.Claims;
 using DrumDeals.Models;
 using DrumDeals.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DrumDeals.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
