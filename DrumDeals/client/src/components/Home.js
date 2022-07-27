@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Row} from "reactstrap"
+import {Row, Container} from "reactstrap"
 import { Listing } from "./Listings/Listing";
 import { getHomeListings } from "../modules/listingsManager";
 import { getCurrentUser } from "../modules/userProfileManager";
@@ -38,13 +38,17 @@ useEffect(() => {
 
 return (
   <>
-  <h1>Welcome {user.firstName}!</h1> <br/>
-  <h4>Here's the most recent listings</h4>
-  <Row>
-      {listings.map((listing) => (
-        <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} render={render} setRender={setRender} />
-      ))}
-  </Row>
+    <Container className="m-1">
+      <Container className="text-center">
+        <h1>Welcome {user.firstName}!</h1> <br/>
+        <h4>Here's the most recent listings</h4>
+      </Container>
+        <Row>
+            {listings.map((listing) => (
+              <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} render={render} setRender={setRender} />
+            ))}
+        </Row>
+    </Container>
   </>
   )
 }
