@@ -34,13 +34,13 @@ const displayFavorite = () => {
   }
   else if (userFavorites.find(fav => fav.listingId === listing.id)) {
     return (
-      <div>
+      <div className="bggray2 text-warning">
         <i className="fa-solid fa-star fa-xl" onClick={handleDeleteFavorite}></i>
       </div>
     );
   } else {
     return (
-      <div>
+      <div className="bggray2 text-warning">
         <i className="fa-regular fa-star fa-xl" onClick={handleAddFavorite}></i>
       </div>
     );
@@ -50,7 +50,7 @@ const displayFavorite = () => {
 
 
   return (
-    <Card color="light" style={{width: '20rem'}}>
+    <Card color="light" style={{width: '18rem'}} className="m-1">
       <CardBody>
         <CardHeader>
           <CardTitle tag="h5" className="text-center">
@@ -71,26 +71,34 @@ const displayFavorite = () => {
             <b>Listed On:</b> {formatDate(listing.publishDate)} <br/>
             <b>Seller:</b> {listing.userProfile.firstName} <br/>
           </CardText>
-
+        </CardBody>
+        { (user.id === listing.userProfileId) ? 
+        <CardBody>  
+          <div className="listingButtons" style={{display: "flex", flexDirection: "row"}}>
             <CardLink href={`/listings/details/${listing.id}`}>
               See Details
             </CardLink>
-          { (user.id === listing.userProfileId) ? 
-          <>
-              <CardLink href={`/listings/edit/${listing.id}`}>
-                Edit
-              </CardLink>
-              <CardLink href={`/listings/delete/${listing.id}`}>
-                Delete Listing
-              </CardLink>
-          </> 
-          :
-          '' 
-          }
-          <CardText><br/>
-          {displayFavorite()}
-          </CardText>
-    </CardBody>
-  </Card>
+            <CardLink href={`/listings/edit/${listing.id}`}>
+              Edit
+            </CardLink>
+            <CardLink className="text-sm" href={`/listings/delete/${listing.id}`}>
+              Delete Listing
+            </CardLink>
+          </div>
+        </CardBody>  
+        :
+        <CardBody>
+          <div className="listingButtons">
+            <CardLink href={`/listings/details/${listing.id}`}>
+              See Details
+            </CardLink>
+            <CardText className="m-1">
+              { displayFavorite() }
+            </CardText>
+          </div>
+          
+        </CardBody>
+        }
+    </Card>
   )
 } 
