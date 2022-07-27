@@ -81,30 +81,36 @@ export const EditListingForm = () => {
           <Label for="imageUrl">Image URL</Label>
           <Input type="text" name="imageUrl" id="imageUrl" onChange={handleFieldChange} value={listing.imageUrl} />
         </FormGroup>
-        <FormGroup>
-          <Label for="Category">Category</Label>
-          <Input style={{maxWidth: "10rem"}} type="select" name="description" id="categoryId" onChange={handleFieldChange} value={listing.categoryId} data-dropup-auto="false">
-          {categories.map(cat => (
-            <option value={cat.id} key={cat.id}>
-              {cat.name}
-            </option>
-          ))}
-          </Input>
-        </FormGroup>
-        <FormGroup >
-          <Label for="condition">Condition</Label>
-          <Input style={{maxWidth: "10rem"}} type="text" name="condition" id="condition" onChange={handleFieldChange} value={listing.condition}/>
-        </FormGroup>
-        <FormGroup>
-          <Label for="location">Location</Label>
-          <Input style={{maxWidth: "10rem"}} type="text" name="location" id="location" onChange={handleFieldChange} value={listing.location}/>
-        </FormGroup>
-        <FormGroup>
-          <Label for="price">Price</Label>
-          <Input style={{maxWidth: "5rem"}} type="text" name="price" id="price" onChange={handleFieldChange} value={listing.price} placeholder="$ 00.00" maxLength={8} />
-        </FormGroup>
-        <Button style={{marginRight: "3.5rem"}} onClick={handleUpdateListing} color="primary">Save Listing</Button>
-        <Button onClick={() => navigate(`/listings/mylistings`)} color="danger">Cancel</Button>
+        <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
+          <FormGroup >
+            <Label for="condition">Condition</Label>
+            <Input style={{maxWidth: "10rem"}} type="text" name="condition" id="condition" onChange={handleFieldChange} value={listing.condition}/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="location">Location</Label>
+            <Input style={{maxWidth: "10rem"}} type="text" name="location" id="location" onChange={handleFieldChange} value={listing.location}/>
+          </FormGroup>
+        </div>
+        <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
+          <FormGroup>
+            <Label for="price">Price</Label>
+            <Input style={{maxWidth: "10rem"}} type="text" name="price" id="price" onChange={handleFieldChange} value={listing.price} placeholder="$ 00.00" maxLength={8} />
+          </FormGroup>
+          <FormGroup>
+            <Label for="Category">Category</Label>
+            <Input style={{width: "10rem"}} type="select" name="description" id="categoryId" onChange={handleFieldChange} value={listing.categoryId} data-dropup-auto="false">
+            {categories.map(cat => (
+              <option value={cat.id} key={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+            </Input>
+          </FormGroup>
+        </div>
+        <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
+          <Button onClick={handleUpdateListing} color="primary">Save Listing</Button>
+          <Button onClick={() => navigate(`/listings/mylistings`)} color="danger">Cancel</Button>
+        </div>
       </Form>
     </Container>
   )

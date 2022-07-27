@@ -69,29 +69,33 @@ return (
       <Label for="imageUrl">Image URL</Label>
       <Input bsSize="sm" type="text" name="imageUrl" id="imageUrl" onChange={handleFieldChange} value={listing.imageUrl} />
     </FormGroup>
-      <Label for="Category">Category</Label>
-      <Input style={{maxWidth: "10rem"}} bsSize="sm" type="select" name="description" id="categoryId" onChange={handleFieldChange} value={listing.categoryId} data-dropup-auto="false">
-      <option value="0">Select a Category</option>
-      {categories.map(cat => (
-        <option value={cat.id} key={cat.id}>
-          {cat.name}
-        </option>
-      ))}
-      </Input>
-    <FormGroup>
-      <Label for="condition">Condition</Label>
-      <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="condition" id="condition" onChange={handleFieldChange} value={listing.condition}/>
-    </FormGroup>
-    <FormGroup>
-    </FormGroup>
-    <FormGroup>
-      <Label for="location">Location</Label>
-      <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="location" id="location" onChange={handleFieldChange} value={listing.location}/>
-    </FormGroup>
-    <FormGroup>
-      <Label for="price">Price</Label>
-      <Input style={{maxWidth: "5rem"}} bsSize="sm" type="text" name="price" id="price" onChange={handleFieldChange} value={listing.price} placeholder="$ 00.00" maxLength={8} />
-    </FormGroup>
+    <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
+      <FormGroup>
+        <Label for="condition">Condition</Label>
+        <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="condition" id="condition" onChange={handleFieldChange} value={listing.condition}/>
+      </FormGroup>
+      <FormGroup>
+        <Label for="location">Location</Label>
+        <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="location" id="location" onChange={handleFieldChange} value={listing.location}/>
+      </FormGroup>
+    </div>
+    <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
+      <FormGroup>
+        <Label for="price">Price</Label>
+        <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="price" id="price" onChange={handleFieldChange} value={listing.price} placeholder="$ 00.00" maxLength={8} />
+      </FormGroup>
+      <FormGroup>
+        <Label for="Category">Category</Label>
+          <Input style={{maxWidth: "10rem"}} bsSize="sm" type="select" name="description" id="categoryId" onChange={handleFieldChange} value={listing.categoryId} data-dropup-auto="false">
+          <option value="0">Select a Category</option>
+          {categories.map(cat => (
+            <option value={cat.id} key={cat.id}>
+              {cat.name}
+            </option>
+          ))}
+          </Input>
+      </FormGroup>
+    </div>
     <Button onClick={handleSaveListing} color="primary">Save Listing</Button>
   </Form>
   </Container>
