@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getListingById } from "../../modules/listingsManager";
 import { getCurrentUser } from "../../modules/userProfileManager";
-import { Card, CardBody, Container, Row, Col, CardTitle, ListGroup, ListGroupItem, Button } from "reactstrap"
+import { Card, CardBody, ButtonGroup, CardTitle, CardHeader, CardSubtitle, CardText, Button, CardImg, CardLink, CardFooter, Container } from "reactstrap"
 import { formatDate } from "../../helpers";
+import './Listing.css'
 
 export const ListingDetails = () => {
-  const navigate = useNavigate()
   const { id } = useParams()
   const [user, setUser] = useState({
     id: '',
@@ -28,7 +28,7 @@ export const ListingDetails = () => {
       name: ''
     }
   }
-)
+) 
 
 const getUser = () => {
   getCurrentUser()
@@ -46,55 +46,49 @@ useEffect(() => {
 }, [])
 
   return (
-    <Container fluid>
-      <Row>
-        <Col  sm="3">
-          <Card className="text-center">
-            <CardBody>
-              <CardTitle tag="h5">
-                {listing.title}
-              </CardTitle>
-              <img src={listing.imageUrl} fluid alt="listing image" width='150' className='img-thumbnail' height="150" />
-            </CardBody>
-            </Card>
-            <Card>
-            <CardBody>
-              <ListGroup flush>
-                <ListGroupItem>
-                  <strong>Condition:</strong> {listing.condition} 
-                </ListGroupItem>
-                <ListGroupItem>
-                <strong>Location:</strong> {listing.location} 
-                </ListGroupItem>
-                <ListGroupItem>
-                <strong>Category:</strong> {listing.category.name} 
-                </ListGroupItem>
-                <ListGroupItem>
-                <strong>Price:</strong> ${listing.price} 
-                </ListGroupItem>
-                <ListGroupItem>
-                <strong>Listed On:</strong> {formatDate(listing.publishDate)} 
-                </ListGroupItem>
-              </ListGroup>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col size="md" sm="5">
-          <Card>
-            <CardBody>
+    <Container style={{display: "flex", justifyContent: "center"}}>
+      <Card color="light" style={{width: '40rem'}} className="m-1">
+      <CardBody>
+        <CardHeader>
+          <CardTitle tag="h5" className="text-center">
+              <b>{listing.title}</b>
+          </CardTitle>
+        </CardHeader>
+      </CardBody>
+      <Container style={{width: '100%', height: '25rem', display: 'flex'}}>
+        <CardImg alt="listing thumbnail" src={listing.imageUrl} style={{width: '100%'}} />
+      </Container>
+        <CardBody>
+          <CardText className="my-2">
+            <b>Description</b> <br/>
               {listing.description}
-            </CardBody>
-          </Card>
-          {user.id === listing.userProfileId ?
-          <Card>
-            <CardBody className="details-buttons">
-              <Button type='button' onClick={() => navigate(`/listings/edit/${id}`)}>Update Listing</Button>
-              <Button type='button' onClick={() => navigate(`/listings/delete/${id}`)}>Delete Listing</Button>
-            </CardBody>
-          </Card> : ''}
-        </Col>
-      </Row>
-    </Container>
+              <br/>
+              <hr/>
+            <b>Condition:</b> {listing.condition} <br/>
+            <b>Price:</b> ${listing.price} <br/>
+            <b>Listed On:</b> {formatDate(listing.publishDate)} <br/> 
+            <b>Seller:</b> {user.firstName}<br/>
+          </CardText>
+        </CardBody>
+        { (user.id === listing.userProfileId) ? 
+        <CardBody>  
+          <div className="listingDetailsButtons" style={{display: "flex", flexDirection: "row", justifyContent: 'space-around'}}>
+            <CardLink href={`/listings/details/${listing.id}`}>
+              See Details
+            </CardLink>
+            <CardLink href={`/listings/edit/${listing.id}`}>
+              Edit
+            </CardLink>
+            <CardLink className="text-sm" href={`/listings/delete/${listing.id}`}>
+              Delete Listing
+            </CardLink>
+          </div>
+        </CardBody>
+        : 
+        ''
+        }
+    </Card>
+  </Container>
   )
 }
 
