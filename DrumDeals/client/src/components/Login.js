@@ -20,7 +20,8 @@ export default function Login() {
   };
 
   return (
-    <Form onSubmit={loginSubmit}>
+    <div style={{display: 'flex', justifyContent: 'center'}}>
+    <Form onSubmit={loginSubmit} className="w-4 mt-4">
       <fieldset>
         <FormGroup>
           <Label for="email">Email</Label>
@@ -39,13 +40,16 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="text-center">
           <Button>Login</Button>
         </FormGroup>
-        <em>
+        <FormGroup className="text-center">
+        <em className="text-center">
           Not registered? <Link to="/register">Register</Link>
         </em>
+        </FormGroup>
       </fieldset>
     </Form>
+    </div>
   );
 }

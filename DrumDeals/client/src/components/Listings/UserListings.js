@@ -4,7 +4,7 @@ import { getCurrentUserListings } from "../../modules/listingsManager";
 import { getCurrentUser } from "../../modules/userProfileManager";
 import { getAllUserFavorites } from "../../modules/favoritesManager";
 import { Listing } from "./Listing";
-import {CardDeck, Button, CardGroup, Card} from "reactstrap"
+import {Button, Row} from "reactstrap"
 import { useNavigate } from "react-router-dom";
 
 export const UserListings = () => {
@@ -40,12 +40,12 @@ export const UserListings = () => {
   return (
     <>
     <h1>Your Listings</h1>
-    <Button type="button" onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
-    <CardDeck>
+    <Button className="mb-3" type="button" onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
+    <Row>
       {listings.map((listing) => (
         <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites}/>
       ))}
-    </CardDeck>
+    </Row>
     </>
     )
   }

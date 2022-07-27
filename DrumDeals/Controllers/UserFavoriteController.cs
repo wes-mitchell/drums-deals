@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DrumDeals.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserFavoriteController : ControllerBase
