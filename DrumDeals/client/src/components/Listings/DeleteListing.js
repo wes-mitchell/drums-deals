@@ -25,7 +25,6 @@ const [listing, setListing] = useState({
 )
 
 const handleDelete = () => {
-  console.log(listing)
   deleteListing(listing)
   .then(() => navigate(`/listings`))
 }

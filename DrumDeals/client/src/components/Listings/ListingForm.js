@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllCategories } from "../../modules/categoryManager";
 import { useNavigate } from "react-router";
 import { addListing } from "../../modules/listingsManager";
+import { uploadImageToCloudinary } from "../../modules/imageManager";
 import { Form, FormGroup, Label, Input, Button, Container} from "reactstrap";
 
 export const ListingForm = () => {
@@ -46,6 +47,21 @@ export const ListingForm = () => {
     .then(categories => setCategories(categories))
     .then(setIsLoading(false))
   }
+  
+  const uploadImage = async (e) => {
+    e.preventDefault();
+
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "drumdeals");
+    setIsLoading(true);
+
+    const res = await uploadImageToCloudinary(data);
+    const file = await res.json();
+    listing.imageUrl = file.secure_url;
+    setIsLoading(false);
+  };
 
 useEffect(() => {
   getCategories()
@@ -65,9 +81,9 @@ return (
       <Label for="descripion">Description</Label>
       <Input bsSize="sm" type="textarea" name="description" id="description" onChange={handleFieldChange} value={listing.description}/>
     </FormGroup>
-    <FormGroup>
-      <Label for="imageUrl">Image URL</Label>
-      <Input bsSize="sm" type="text" name="imageUrl" id="imageUrl" onChange={handleFieldChange} value={listing.imageUrl} />
+    <FormGroup className="imageUploader">
+      <Label for='imageUrl'>Upload an Image</Label>
+      <Input type="file" name="file" placeholder="Upload an Image" onChange={(e) => uploadImage(e)}/>
     </FormGroup>
     <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
       <FormGroup>

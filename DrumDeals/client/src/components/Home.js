@@ -4,6 +4,7 @@ import { Listing } from "./Listings/Listing";
 import { getHomeListings } from "../modules/listingsManager";
 import { getCurrentUser } from "../modules/userProfileManager";
 import { getAllUserFavorites } from "../modules/favoritesManager";
+import { log } from "../modules/imageManager";
 
 
 export const Home = () => {
