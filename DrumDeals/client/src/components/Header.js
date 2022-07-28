@@ -10,7 +10,9 @@ export const Header = ({ isLoggedIn }) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand tag={RRNavLink} to="/">Drum Deals</NavbarBrand>
+        <NavbarBrand tag={RRNavLink} to="/">
+          <img src={`/logo.png`} alt={"drum deals logo"} style={{width: "75px", height: "auto"}}/>
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
