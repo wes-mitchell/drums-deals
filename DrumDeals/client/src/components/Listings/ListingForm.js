@@ -20,6 +20,14 @@ export const ListingForm = () => {
     }
   )
 
+  const buttonRender = () => {
+    if (listing.title === '' || listing.condition === '' || listing. location === '' || listing.price === '' || listing.categoryId === 0 || listing.imageUrl === '') {
+      return <Button color="primary" disabled>Save Listing</Button>
+    } else {
+      return <Button onClick={handleSaveListing} color="primary" active>Save Listing</Button>
+    }
+  }
+
   const handleFieldChange = (evt) => {
     const newListing = {...listing}
     let selectedVal  = evt.target.value
@@ -30,18 +38,11 @@ export const ListingForm = () => {
   const handleSaveListing = (evt) => {
     evt.preventDefault();
 
- 
-    if (listing.title === '' || listing.condition === '' || listing. location === '' || listing.price === '' || listing.categoryId === "0" || listing.imageUrl === '') 
-    {
-      window.alert("Whoops, make sure you fill out all fields")
-      setIsLoading(false)
-    } else {
       setIsLoading(true)
       listing.categoryId = parseInt(listing.categoryId)
       listing.price = parseFloat(listing.price).toFixed(2)
       addListing(listing)
       .then(() => navigate('/listings/mylistings'))
-    }
   }
 
   const getCategories = () => {
@@ -114,7 +115,7 @@ return (
           </Input>
       </FormGroup>
     </div>
-    <Button onClick={handleSaveListing} color="primary">Save Listing</Button>
+    { buttonRender() }
   </Form>
   </Container>
   )
