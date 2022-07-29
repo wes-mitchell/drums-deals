@@ -8,6 +8,7 @@ import { formatDate } from "../../helpers";
 import './Listing.css'
 
 export const ListingDetails = () => {
+  const navigate = useNavigate()
   const { id } = useParams()
   const [user, setUser] = useState({
     id: '',
@@ -46,8 +47,8 @@ useEffect(() => {
 }, [])
 
   return (
-    <Container style={{display: "flex", justifyContent: "center"}}>
-      <Card color="light" style={{width: '40rem'}} className="m-1">
+    <Container style={{display: "flex", justifyContent: "center"}} className="mt-1">
+      <Card color="light" style={{width: '30rem'}} className="m-1">
       <CardBody>
         <CardHeader>
           <CardTitle tag="h5" className="text-center">
@@ -63,7 +64,7 @@ useEffect(() => {
             <b>Description</b> <br/>
               {listing.description}
               <br/>
-              <hr/>
+            <hr/>
             <b>Condition:</b> {listing.condition} <br/>
             <b>Price:</b> ${listing.price} <br/>
             <b>Listed On:</b> {formatDate(listing.publishDate)} <br/> 
@@ -72,16 +73,13 @@ useEffect(() => {
         </CardBody>
         { (user.id === listing.userProfileId) ? 
         <CardBody>  
-          <div className="listingDetailsButtons" style={{display: "flex", flexDirection: "row", justifyContent: 'space-around'}}>
-            <CardLink href={`/listings/details/${listing.id}`}>
-              See Details
-            </CardLink>
-            <CardLink href={`/listings/edit/${listing.id}`}>
+          <div className="listingDetailsButtons" style={{display: "flex", flexDirection: "row", justifyContent: 'space-between'}}>
+            <Button type='button' onClick={() => navigate(`/listings/edit/${listing.id}`)}>
               Edit
-            </CardLink>
-            <CardLink className="text-sm" href={`/listings/delete/${listing.id}`}>
+            </Button>
+            <Button type='button' color="danger" onClick={() => navigate(`/listings/delete/${listing.id}`)}>
               Delete Listing
-            </CardLink>
+            </Button>
           </div>
         </CardBody>
         : 

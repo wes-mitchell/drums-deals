@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Card, CardBody, ButtonGroup, CardTitle, CardHeader, CardSubtitle, CardText, Button, CardImg, CardLink, CardFooter, Container } from "reactstrap"
+import { Card, CardBody, ButtonGroup, CardTitle, CardHeader, CardSubtitle, CardText, Button, CardImg, CardLink, CardFooter } from "reactstrap"
 import { Link } from "react-router-dom";
 import { addFavorite, deleteFavorite } from "../../modules/favoritesManager";
 import { formatDate } from "../../helpers";
@@ -60,9 +60,7 @@ const displayFavorite = () => {
           </CardTitle>
         </CardHeader>
 
-        <Container style={{width: '100%', height: '12rem', display: 'flex'}}>
-        <CardImg alt="listing thumbnail" src={listing.imageUrl} style={{width: '100%'}} />
-        </Container>
+          <CardImg alt="listing thumbnail" src={listing.imageUrl} style={{width: '100%'}} />
 
         </CardBody>
         
@@ -91,13 +89,14 @@ const displayFavorite = () => {
         :
         <CardBody>
           <div className="listingButtons">
-          <CardText className="m-1">
-              { displayFavorite() }
-            </CardText>
             <CardLink href={`/listings/details/${listing.id}`}>
               See Details
             </CardLink>
+            <CardText className="m-1">
+              { displayFavorite() }
+            </CardText>
           </div>
+          
         </CardBody>
         }
     </Card>
