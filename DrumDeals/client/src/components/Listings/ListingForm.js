@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { addListing } from "../../modules/listingsManager";
 import { uploadImageToCloudinary } from "../../modules/imageManager";
 import { Form, FormGroup, Label, Input, Button, Container} from "reactstrap";
+import './ListingForm.css'
 
 export const ListingForm = () => {
   const navigate = useNavigate();
@@ -72,51 +73,53 @@ useEffect(() => {
 
 return (
   <Container style={{maxWidth: "25rem"}}>
-    <Form className="m-1">
-      <Container className="text-center">
-        <h3>Create a Listing</h3>
-      </Container>
-    <FormGroup>
-      <Label for="title">Title</Label>
-      <Input bsSize="sm" type="text" name="title" id="title" onChange={handleFieldChange} value={listing.title} />
-    </FormGroup>
-    <FormGroup>
-      <Label for="descripion">Description</Label>
-      <Input bsSize="sm" type="textarea" name="description" id="description" onChange={handleFieldChange} value={listing.description}/>
-    </FormGroup>
-    <FormGroup className="imageUploader">
-      <Label for='imageUrl'>Upload an Image</Label>
-      <Input type="file" name="file" placeholder="Upload an Image" onChange={(e) => uploadImage(e)}/>
-    </FormGroup>
-    <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
+    <div className="listingForm">
+      <Form className="m-1">
+        <Container className="text-center">
+          <h3>Create a Listing</h3>
+        </Container>
       <FormGroup>
-        <Label for="condition">Condition</Label>
-        <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="condition" id="condition" onChange={handleFieldChange} value={listing.condition}/>
+        <Label for="title">Title</Label>
+        <Input bsSize="sm" type="text" name="title" id="title" onChange={handleFieldChange} value={listing.title} />
       </FormGroup>
       <FormGroup>
-        <Label for="location">Location</Label>
-        <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="location" id="location" onChange={handleFieldChange} value={listing.location}/>
+        <Label for="descripion">Description</Label>
+        <Input bsSize="sm" type="textarea" name="description" id="description" onChange={handleFieldChange} value={listing.description}/>
       </FormGroup>
+      <FormGroup className="imageUploader">
+        <Label for='imageUrl'>Upload an Image</Label>
+        <Input type="file" name="file" placeholder="Upload an Image" onChange={(e) => uploadImage(e)}/>
+      </FormGroup>
+      <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
+        <FormGroup>
+          <Label for="condition">Condition</Label>
+          <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="condition" id="condition" onChange={handleFieldChange} value={listing.condition}/>
+        </FormGroup>
+        <FormGroup>
+          <Label for="location">Location</Label>
+          <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="location" id="location" onChange={handleFieldChange} value={listing.location}/>
+        </FormGroup>
+      </div>
+      <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
+        <FormGroup>
+          <Label for="price">Price</Label>
+          <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="price" id="price" onChange={handleFieldChange} value={listing.price} placeholder="$ 00.00" maxLength={8} />
+        </FormGroup>
+        <FormGroup>
+          <Label for="Category">Category</Label>
+            <Input style={{maxWidth: "10rem"}} bsSize="sm" type="select" name="description" id="categoryId" onChange={handleFieldChange} value={listing.categoryId} data-dropup-auto="false">
+            <option value="0">Select a Category</option>
+            {categories.map(cat => (
+              <option value={cat.id} key={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+            </Input>
+        </FormGroup>
+      </div>
+      { buttonRender() }
+      </Form>
     </div>
-    <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
-      <FormGroup>
-        <Label for="price">Price</Label>
-        <Input style={{maxWidth: "10rem"}} bsSize="sm" type="text" name="price" id="price" onChange={handleFieldChange} value={listing.price} placeholder="$ 00.00" maxLength={8} />
-      </FormGroup>
-      <FormGroup>
-        <Label for="Category">Category</Label>
-          <Input style={{maxWidth: "10rem"}} bsSize="sm" type="select" name="description" id="categoryId" onChange={handleFieldChange} value={listing.categoryId} data-dropup-auto="false">
-          <option value="0">Select a Category</option>
-          {categories.map(cat => (
-            <option value={cat.id} key={cat.id}>
-              {cat.name}
-            </option>
-          ))}
-          </Input>
-      </FormGroup>
-    </div>
-    { buttonRender() }
-  </Form>
   </Container>
   )
 }
