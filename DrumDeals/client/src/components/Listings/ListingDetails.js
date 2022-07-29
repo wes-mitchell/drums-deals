@@ -46,8 +46,8 @@ useEffect(() => {
 }, [])
 
   return (
-    <Container style={{display: "flex", justifyContent: "center"}}>
-      <Card color="light" style={{width: '40rem'}} className="m-1">
+    <Container style={{display: "flex", justifyContent: "center"}} className="mt-1">
+      <Card color="light" style={{width: '30rem'}} className="m-1">
       <CardBody>
         <CardHeader>
           <CardTitle tag="h5" className="text-center">
