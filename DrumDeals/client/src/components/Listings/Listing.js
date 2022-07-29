@@ -89,14 +89,13 @@ const displayFavorite = () => {
         :
         <CardBody>
           <div className="listingButtons">
-            <CardLink href={`/listings/details/${listing.id}`}>
-              See Details
-            </CardLink>
             <CardText className="m-1">
               { displayFavorite() }
             </CardText>
+            <CardLink href={`/listings/details/${listing.id}`}>
+              See Details
+            </CardLink>
           </div>
-          
         </CardBody>
         }
     </Card>

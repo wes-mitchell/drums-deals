@@ -5,6 +5,7 @@ import { getAllCategories } from "../../modules/categoryManager";
 import { Form, FormGroup, Label, Input, Button, Container} from "reactstrap";
 import { uploadImageToCloudinary } from "../../modules/imageManager";
 import { updateListing } from "../../modules/listingsManager";
+import './EditListingForm.css'
 
 export const EditListingForm = () => {
   const navigate = useNavigate()
@@ -84,6 +85,7 @@ export const EditListingForm = () => {
 
   return (
     <Container style={{maxWidth: "25rem"}}>
+      <div className="editListingForm">
       <Form className="m-1">
         <Container className="text-center">
           <h3>Update Your Listing</h3>
@@ -131,6 +133,7 @@ export const EditListingForm = () => {
           <Button onClick={() => navigate(`/listings/mylistings`)} color="danger">Cancel</Button>
         </div>
       </Form>
+      </div>
     </Container>
   )
 }
