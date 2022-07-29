@@ -30,7 +30,9 @@ export const ListingForm = () => {
   const handleSaveListing = (evt) => {
     evt.preventDefault();
 
-    if (listing.title === '' || listing.condition === '' || listing. location === '' || listing.price === '' || listing.categoryId === "0") {
+ 
+    if (listing.title === '' || listing.condition === '' || listing. location === '' || listing.price === '' || listing.categoryId === "0" || listing.imageUrl === '') 
+    {
       window.alert("Whoops, make sure you fill out all fields")
       setIsLoading(false)
     } else {
@@ -51,11 +53,11 @@ export const ListingForm = () => {
   const uploadImage = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
     data.append("upload_preset", "drumdeals");
-    setIsLoading(true);
 
     const res = await uploadImageToCloudinary(data);
     const file = await res.json();

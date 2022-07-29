@@ -1,4 +1,5 @@
-const cloudApi = "https://api.cloudinary.com/v1_1/wmdrums/image/upload"
+import { settings } from "../settings";
+const cloudApi = settings.cloudinaryKey
 
 export const uploadImageToCloudinary = (data) => {
   return fetch(cloudApi, {
