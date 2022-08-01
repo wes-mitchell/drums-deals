@@ -128,7 +128,7 @@ export const EditListingForm = () => {
             </Input>
           </FormGroup>
         </div>
-        <div style={{display: "flex", flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
+        <div className='editFootButtons'>
           {buttonRender()}
           <Button onClick={() => navigate(`/listings/mylistings`)} color="danger">Cancel</Button>
         </div>

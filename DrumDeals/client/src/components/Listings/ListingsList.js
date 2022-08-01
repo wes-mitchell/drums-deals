@@ -6,7 +6,8 @@ import { getCurrentUser } from "../../modules/userProfileManager";
 import { Listing } from "./Listing";
 import { getAllUserFavorites } from "../../modules/favoritesManager";
 import { searchListingsByTitle } from "../../modules/listingsManager";
-import { Button, Row, Container } from "reactstrap"
+import { Button, Row, Container, Input } from "reactstrap"
+import './ListingList.css'
 
 export const ListingsList = () => {
   const navigate = useNavigate()
@@ -50,22 +51,24 @@ const handleFieldChange = (evt) => {
   
   return (
     <>
-      <Container className="m-1">
+      <div className="listContainer">
         <Container className="text-center">
           <h1>Current Listings</h1>
-          <h3>Search For a Listing</h3>
-          <input type="text" className="search" onChange={handleFieldChange}/><br/>
         </Container>
-
-      <Row>
-        <Button className="m-1 mb-2" type="button" style={{width: "8rem"}} onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
-      </Row>
-      <Row>
-        {listings.map((listing) => (
-          <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} render={render} setRender={setRender} />
-        ))}
-      </Row>
-    </Container>
+        <div className="searchBar">
+          <Row>
+            <Input className="m-1" type="text" onChange={handleFieldChange} style={{width: "15rem"}} placeholder='search for a listing' /> <br/>
+          </Row>
+        </div>
+        <Row>
+          <Button className="m-1 mb-2" type="button" color='primary' style={{width: "8rem"}} onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
+        </Row>
+        <Row>
+          {listings.map((listing) => (
+            <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} render={render} setRender={setRender} />
+          ))}
+        </Row>
+      </div>
     </>
     )
   }

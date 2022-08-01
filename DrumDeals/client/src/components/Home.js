@@ -38,7 +38,8 @@ useEffect(() => {
 
 return (
   <>
-    <Container className="m-1">
+  <Container className="d-flex align-content-center">
+    <Container>
       <Container className="text-center">
         <h1>Welcome {user.firstName}!</h1> <br/>
         <h4>Here's the most recent listings</h4>
@@ -49,6 +50,7 @@ return (
             ))}
         </Row>
     </Container>
+  </Container>
   </>
   )
 }

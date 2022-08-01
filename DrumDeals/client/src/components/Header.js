@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink as RRNavLink } from "react-router-dom";
-import {Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink} from 'reactstrap';
+import {Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,Container} from 'reactstrap';
+import './Header.css'
 import { logout } from '../modules/authManager';
 
 export const Header = ({ isLoggedIn }) => {
@@ -8,7 +9,8 @@ export const Header = ({ isLoggedIn }) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
+    <div className='navContainer'>
+    <Container className='d-flex justify-content-center'>
       <Navbar color="light" light expand="md">
         <NavbarBrand tag={RRNavLink} to="/">
           <img src={`/logo.png`} alt={"drum deals logo"} style={{width: "75px", height: "auto"}}/>
@@ -68,6 +70,7 @@ export const Header = ({ isLoggedIn }) => {
           </Nav>
         </Collapse>
       </Navbar>
-    </div>
+      </Container>
+      </div>
   );
 }

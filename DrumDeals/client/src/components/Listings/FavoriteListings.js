@@ -4,6 +4,7 @@ import { getFavoriteListings } from "../../modules/listingsManager";
 import { getAllUserFavorites } from "../../modules/favoritesManager";
 import { Row, Container } from "reactstrap"
 import { Listing } from "./Listing";
+import './FavoriteListings.css'
 
 export const FavoriteListings = () => {
 const [listings, setListings] = useState([])
@@ -37,6 +38,7 @@ useEffect(() => {
 
   return (
     <>
+    <div className="favoritesContainer">
       <Container className="m-1">
         <Container className="text-center">
           <h1>Your Favorited Listings</h1>
@@ -47,6 +49,7 @@ useEffect(() => {
         ))}
         </Row>
       </Container>
+      </div>
     </>
   )
 }
