@@ -6,6 +6,7 @@ import { getAllUserFavorites } from "../../modules/favoritesManager";
 import { Listing } from "./Listing";
 import {Button, Row, Container} from "reactstrap"
 import { useNavigate } from "react-router-dom";
+import './UserListings.css'
 
 export const UserListings = () => {
   const navigate = useNavigate()
@@ -39,19 +40,19 @@ export const UserListings = () => {
   
   return (
     <>
-      <Container className="m-1">
-        <Container className="text-center">
-          <h1>Your Listings</h1>
-        </Container>
-        <Row>
-          <Row>
-            <Button className="m-1 mb-2" type="button" style={{width: "8rem"}} onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
-          </Row>
-          {listings.map((listing) => (
-            <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites}/>
-          ))}
-        </Row>
+    <div className="userListContainer">
+      <Container className="text-center">
+        <h1>Your Listings</h1>
       </Container>
+      <Row>
+        <Button className="m-1 mb-2" type="button" color="primary" style={{width: "8rem"}} onClick={() => navigate(`/listings/create`)}>Add Listing</Button>
+      </Row>
+      <Row className="d-flex">
+      {listings.map((listing) => (
+        <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites}/>
+      ))}
+      </Row>
+    </div>
     </>
     )
   }

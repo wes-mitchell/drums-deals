@@ -117,7 +117,10 @@ return (
             </Input>
         </FormGroup>
       </div>
-      { buttonRender() }
+      <div className='footButtons'>
+          {buttonRender()}
+          <Button onClick={() => navigate(`/listings/mylistings`)} color="danger">Cancel</Button>
+      </div>
       </Form>
     </div>
   </Container>

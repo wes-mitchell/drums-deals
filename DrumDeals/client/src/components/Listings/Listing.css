@@ -10,3 +10,13 @@ i:hover {
   position: absolute;
   bottom: 0;
 }
+
+.cardImageContainer {
+  width: 100%
+}
+
+.cardImage {
+  height: 13vw;
+  width: 100%
+}
+
