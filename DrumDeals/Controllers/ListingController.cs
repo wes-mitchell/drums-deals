@@ -89,6 +89,34 @@ namespace DrumDeals.Controllers
 
             return NoContent();
         }
+        [HttpPut("deactivate/{id}")]
+        public IActionResult DeactivateListing(int id)
+        {
+            Listing listing =  _listingRepository.GetListingById(id);
+            if (id != listing.Id)
+            {
+                return BadRequest();
+            }
+
+            listing.IsActive = false;
+            _listingRepository.Update(listing);
+
+            return NoContent();
+        }
+        [HttpPut("activate/{id}")]
+        public IActionResult ActivateListing(int id)
+        {
+            Listing listing = _listingRepository.GetListingById(id);
+            if (id != listing.Id)
+            {
+                return BadRequest();
+            }
+
+            listing.IsActive = true;
+            _listingRepository.Update(listing);
+
+            return NoContent();
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, Listing listing)

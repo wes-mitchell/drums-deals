@@ -4,10 +4,13 @@ import { Card, CardBody, ButtonGroup, CardTitle, CardHeader, CardSubtitle, CardT
 import { Link } from "react-router-dom";
 import { addFavorite, deleteFavorite } from "../../modules/favoritesManager";
 import { formatDate } from "../../helpers";
+import { activateListing, deactivateListing } from "../../modules/listingsManager";
 import './Listing.css'
 
 
 export const Listing = ({ listing, user, userFavorites, render, setRender }) => {
+
+const [isLoading, setIsLoading] = useState(false)
 
 const handleAddFavorite = (evt) => {
   evt.preventDefault()
@@ -25,11 +28,31 @@ const handleDeleteFavorite = (evt) => {
   .then(() => setRender(render + 2))
 }
 
+const handleDeactivateListing = (evt) => {
+  evt.preventDefault()
+  deactivateListing(listing.id)
+  .then(() => setRender(render + 1))
+}
+
+const handleReactivateListing = (evt) => {
+  evt.preventDefault()
+  activateListing(listing.id)
+  .then(() => setRender(render + 1))
+}
+
 const listingActive = () => {
   if (listing.isActive) {
     return "light"
   } else {
     return "warning"
+  }
+}
+
+const renderActivateListing = () => {
+  if (listing.isActive) {
+    return <Button type='button' size='sm' color="danger" onClick={handleDeactivateListing}>Deactivate Listing</Button>
+  } else {
+    return <Button type='button' size='sm' color='primary' onClick={handleReactivateListing}>Reactivate Listing</Button>
   }
 }
 
@@ -58,6 +81,7 @@ const displayFavorite = () => {
 
 
   return (
+    <>
     <Card color={listingActive()} style={{width: '18rem'}} className="m-1">
       <CardBody>
         <CardHeader>
@@ -83,7 +107,10 @@ const displayFavorite = () => {
           </CardText>
         </CardBody>
         { (user.id === listing.userProfileId) ? 
-        <CardBody>  
+        <CardBody>
+          <CardText>
+            {renderActivateListing()}
+          </CardText>
           <div className="listingButtons" style={{display: "flex", flexDirection: "row"}}>
             <CardLink href={`/listings/details/${listing.id}`}>
               See Details
@@ -95,7 +122,7 @@ const displayFavorite = () => {
               Delete Listing
             </CardLink>
           </div>
-        </CardBody>  
+        </CardBody>
         :
         <CardBody>
           <div className="listingButtons">
@@ -107,7 +134,8 @@ const displayFavorite = () => {
             </CardLink>
           </div>
         </CardBody>
-        }
+        } 
     </Card>
+    </>
   )
 } 

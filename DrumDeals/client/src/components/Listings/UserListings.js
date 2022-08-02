@@ -12,6 +12,7 @@ export const UserListings = () => {
   const navigate = useNavigate()
   const [listings, setListings] = useState([])
   const [userFavorites, setUserFavorites] = useState([])
+  const [render, setRender] = useState(1)
   const [user, setUser] = useState({
     id: '',
     firstName: ''
@@ -36,7 +37,7 @@ export const UserListings = () => {
     getListings()
     getUser()
     getFavorites()
-  }, [])
+  }, [render])
   
   return (
     <>
@@ -49,7 +50,7 @@ export const UserListings = () => {
       </Row>
       <Row className="d-flex">
       {listings.map((listing) => (
-        <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites}/>
+        <Listing listing={listing} key={listing.id} user={user} userFavorites={userFavorites} render={render} setRender={setRender}/>
       ))}
       </Row>
     </div>
