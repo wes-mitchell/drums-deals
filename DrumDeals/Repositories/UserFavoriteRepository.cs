@@ -120,14 +120,14 @@ namespace DrumDeals.Repositories
                     {
                         cmd.CommandText = @"
                                     SELECT uf.Id, uf.UserProfileId AS UserFavoriteProfileId, uf.ListingId,
-                                    l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, 
+                                    l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, l.IsActive as 'ListingActive', l.PurchasePrice,
 		                                    up.Id as UserProfileId, up.FirstName, up.LastName, up.Email, up.IsAdmin, up.IsActive,
 		                                    c.Id, c.Name
                                     FROM UserFavorite uf
                                     JOIN Listing l ON l.Id = uf.ListingId
                                     JOIN UserProfile up ON up.Id = l.UserProfileId
                                     JOIN Category c ON c.Id = l.CategoryId
-                                    WHERE uf.UserProfileId = @userId";
+                                    WHERE uf.UserProfileId = @userId AND l.IsActive = 'True'";
 
                         DbUtils.AddParameter(cmd, "userId", userId);
 
@@ -163,7 +163,9 @@ namespace DrumDeals.Repositories
                                             Email = DbUtils.GetString(reader, "Email"),
                                             IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
                                             IsAdmin = reader.GetBoolean(reader.GetOrdinal("IsAdmin"))
-                                        }
+                                        },
+                                        IsActive = reader.GetBoolean(reader.GetOrdinal("ListingActive")),
+                                        PurchasePrice = reader.GetDecimal(reader.GetOrdinal("PurchasePrice"))
                                     };
                                     listings.Add(listing);
                                 }

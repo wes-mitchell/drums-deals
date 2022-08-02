@@ -124,7 +124,7 @@ namespace DrumDeals.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        SELECT l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, 
+                                        SELECT l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, l.IsActive as 'ListingActive', l.PurchasePrice,
 		                                       up.Id as UserProfileId, up.FirstName, up.LastName, up.Email, up.IsAdmin, up.IsActive,
 		                                       c.Id, c.Name 
                                         FROM Listing l
@@ -191,7 +191,9 @@ namespace DrumDeals.Repositories
                                 Description = @Description,
                                 Price = @Price,
                                 CategoryId = @CategoryId,
-                                ImageUrl = @ImageUrl
+                                ImageUrl = @ImageUrl,
+                                IsActive = @IsActive,
+                                PurchasePrice = @PurchasePrice
                             WHERE Id = @Id";
 
                         DbUtils.AddParameter(cmd, "@Id", listing.Id);
@@ -202,6 +204,8 @@ namespace DrumDeals.Repositories
                         DbUtils.AddParameter(cmd, "@Price", listing.Price);
                         DbUtils.AddParameter(cmd, "@CategoryId", listing.CategoryId);
                         DbUtils.AddParameter(cmd, "@ImageUrl", listing.ImageUrl);
+                        DbUtils.AddParameter(cmd, "@IsActive", listing.IsActive);
+                        DbUtils.AddParameter(cmd, "@PurchasePrice", listing.Price);
 
                         cmd.ExecuteNonQuery();
                     }

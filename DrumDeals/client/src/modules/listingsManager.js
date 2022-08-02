@@ -178,3 +178,43 @@ export const searchListingsByTitle = (query) => {
         })
     })
 }
+
+export const deactivateListing = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/deactivate/${id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            if (res.ok) {
+
+            } else {
+                throw new Error(
+                    "An unknown error occurred while trying to deactivate the listing."
+                )
+            }
+        })
+    })
+}
+
+export const activateListing = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${baseUrl}/activate/${id}`, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        }).then((res) => {
+            if (res.ok) {
+
+            } else {
+                throw new Error(
+                    "An unknown error occurred while trying to activate the listing."
+                )
+            }
+        })
+    })
+}
