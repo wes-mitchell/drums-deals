@@ -216,7 +216,7 @@ namespace DrumDeals.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        SELECT l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, 
+                                        SELECT l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, l.IsActive AS 'ListingActive', l.PurchasePrice,
 		                                       up.Id as UserProfileId, up.FirstName, up.LastName, up.Email, up.IsAdmin, up.IsActive,
 		                                       c.Id, c.Name 
                                         FROM Listing l
@@ -260,6 +260,8 @@ namespace DrumDeals.Repositories
                                 IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
                                 IsAdmin = reader.GetBoolean(reader.GetOrdinal("IsAdmin"))
                             },
+                            IsActive = reader.GetBoolean(reader.GetOrdinal("ListingActive")),
+                            PurchasePrice = reader.GetDecimal(reader.GetOrdinal("PurchasePrice"))
                         };
                         listings.Add(listing);
                     }

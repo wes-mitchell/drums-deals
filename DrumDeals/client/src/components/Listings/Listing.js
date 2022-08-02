@@ -25,6 +25,14 @@ const handleDeleteFavorite = (evt) => {
   .then(() => setRender(render + 2))
 }
 
+const listingActive = () => {
+  if (listing.isActive) {
+    return "light"
+  } else {
+    return "warning"
+  }
+}
+
 
 const displayFavorite = () => {
   if (user.id === listing.userProfileId) {
@@ -50,7 +58,7 @@ const displayFavorite = () => {
 
 
   return (
-    <Card color="light" style={{width: '18rem'}} className="m-1">
+    <Card color={listingActive()} style={{width: '18rem'}} className="m-1">
       <CardBody>
         <CardHeader>
           <CardTitle tag="h5" className="text-center">
