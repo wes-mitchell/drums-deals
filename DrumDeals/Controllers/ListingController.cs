@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace DrumDeals.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ListingController : ControllerBase

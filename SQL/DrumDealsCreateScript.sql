@@ -25,7 +25,9 @@ CREATE TABLE [Listing] (
   [CategoryId] int NOT NULL,
   [PublishDate] datetime NOT NULL,
   [EndDate] datetime,
-  [ImageUrl] nvarchar(255)
+  [ImageUrl] nvarchar(255),
+  [IsActive] bit NOT NULL DEFAULT (1),
+  [PurchasePrice] decimal(38, 2) NOT NULL DEFAULT (0)
 )
 GO
 

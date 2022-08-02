@@ -18,12 +18,13 @@ namespace DrumDeals.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                        SELECT l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, 
-		                                       up.Id as UserProfileId, up.FirstName, up.LastName, up.Email, up.IsAdmin, up.IsActive,
-		                                       c.Id, c.Name 
+                                        SELECT l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, l.IsActive, l.PurchasePrice,
+		                                    up.Id as UserProfileId, up.FirstName, up.LastName, up.Email, up.IsAdmin, up.IsActive,
+		                                    c.Id, c.Name 
                                         FROM Listing l
                                         JOIN UserProfile up ON up.Id = l.UserProfileId
                                         JOIN Category c ON c.Id = l.CategoryId
+                                        WHERE l.IsActive = 'True'
                                         ORDER BY l.PublishDate DESC";
 
                     var reader = cmd.ExecuteReader();
@@ -56,7 +57,9 @@ namespace DrumDeals.Repositories
                                 Email = DbUtils.GetString(reader, "Email"),
                                 IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
                                 IsAdmin = reader.GetBoolean(reader.GetOrdinal("IsAdmin"))
-                            }
+                            }, 
+                            IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
+                            PurchasePrice = reader.GetDecimal(reader.GetOrdinal("PurchasePrice"))
                         };
                         listings.Add(listing);
                     }
@@ -256,7 +259,7 @@ namespace DrumDeals.Repositories
                                 Email = DbUtils.GetString(reader, "Email"),
                                 IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
                                 IsAdmin = reader.GetBoolean(reader.GetOrdinal("IsAdmin"))
-                            }
+                            },
                         };
                         listings.Add(listing);
                     }
@@ -274,13 +277,14 @@ namespace DrumDeals.Repositories
                     using (var cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = @"
-                                SELECT TOP 5 l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, 
-		                                up.Id as UserProfileId, up.FirstName, up.LastName, up.Email, up.IsAdmin, up.IsActive,
-		                                c.Id, c.Name
-                                FROM Listing l
-                                JOIN UserProfile up ON up.Id = l.UserProfileId
-                                JOIN Category c ON c.Id = l.CategoryId
-                                ORDER BY l.PublishDate DESC";
+                                        SELECT TOP 5 l.Id as ListingId, l.Title, l.Condition, l.Location, l.Description, l.Price, l.CategoryId, l.PublishDate, l.EndDate, l.ImageUrl, l.IsActive AS 'ListingActive', l.PurchasePrice,
+		                                        up.Id as UserProfileId, up.FirstName, up.LastName, up.Email, up.IsAdmin, up.IsActive,
+		                                        c.Id, c.Name 
+                                        FROM Listing l
+                                        JOIN UserProfile up ON up.Id = l.UserProfileId
+                                        JOIN Category c ON c.Id = l.CategoryId
+                                        WHERE l.IsActive = 'True'
+                                        ORDER BY l.PublishDate DESC";
 
                         using (var reader = cmd.ExecuteReader())
                         {
@@ -313,7 +317,9 @@ namespace DrumDeals.Repositories
                                         Email = DbUtils.GetString(reader, "Email"),
                                         IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
                                         IsAdmin = reader.GetBoolean(reader.GetOrdinal("IsAdmin"))
-                                    }
+                                    },
+                                    IsActive = reader.GetBoolean(reader.GetOrdinal("ListingActive")),
+                                    PurchasePrice = reader.GetDecimal(reader.GetOrdinal("PurchasePrice"))
                                 };
                                 listings.Add(listing);
                             }

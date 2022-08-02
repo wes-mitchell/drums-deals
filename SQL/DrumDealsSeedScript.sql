@@ -59,7 +59,9 @@ instrument you may have', 13.99, 5, '2022-07-03T16:51:06.003Z',
 (13, 'Sonic Energy Gong Mallet', 'Used', 3, 'Rockford, IL', 'This mallet has seen a good bit of use so I am will to let it go cheap!', 21.99, 5, '2022-07-28T10:13:06.003Z', 
 'https://res.cloudinary.com/wmdrums/image/upload/v1659122404/drumdeals/gong_mallet_ogqbqy.jpg'),
 (14, 'SKB 14 x 5.5 Molded Hard Snare Drum Case', 'Slightly Used', 5, 'Reno, NV', 'This is slightly used and only been on a couple of tours. It stills holds up and has many years left.', 75.99, 7, '2022-08-01T10:13:06.003Z', 
-'https://res.cloudinary.com/wmdrums/image/upload/v1659369183/drumdeals/kbxzypcsl8hm0ia5hpyj.jpg')
+'https://res.cloudinary.com/wmdrums/image/upload/v1659369183/drumdeals/kbxzypcsl8hm0ia5hpyj.jpg'),
 (15, 'Meinl 22" Soft Cymbal Bag', 'New', 1, 'Orlando, FL', 'Brand New! Bought it for my kid and they never used it.', 55.75, 5, '2022-07-16T10:13:06.003Z', 
-'https://res.cloudinary.com/wmdrums/image/upload/v1659369962/drumdeals/ijm10ztihaelyszurbxh.jpg')
+'https://res.cloudinary.com/wmdrums/image/upload/v1659369962/drumdeals/ijm10ztihaelyszurbxh.jpg'),
+(16, 'Pearl Bass Drum Pedal', 'Used', 4, 'Atlanta, GA', 'This is the model P-30 bass drum pedal. It has seen some good use but is still holding up. Would be great for a beginner or home practice kit. ', 45.75, 4, '2022-07-03T10:13:06.003Z', 
+'https://res.cloudinary.com/wmdrums/image/upload/v1659385149/drumdeals/swgdixproebs0jvuzxqk.jpg')
 set identity_insert [Listing] off;

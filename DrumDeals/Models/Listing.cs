@@ -26,5 +26,7 @@ namespace DrumDeals.Models
         public string ImageUrl { get; set; }
         public Category Category { get; set; }
         public UserProfile UserProfile { get; set; }
+        public bool IsActive { get; set; }
+        public decimal PurchasePrice { get; set; }
     }
 }
