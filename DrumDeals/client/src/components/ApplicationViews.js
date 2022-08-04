@@ -9,6 +9,7 @@ import { EditListingForm } from "./Listings/EditListingForm";
 import { DeleteListing } from "./Listings/DeleteListing";
 import { ListingDetails } from "./Listings/ListingDetails";
 import { FavoriteListings } from "./Listings/FavoriteListings";
+import { OfferForm } from "./Offers/OfferForm";
 import { Home } from "./Home";
 
 export default function ApplicationViews({ isLoggedIn }) {
