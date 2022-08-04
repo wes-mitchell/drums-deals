@@ -18,7 +18,8 @@ export const EditListingForm = () => {
     description: '',
     price: '',
     categoryId: 0,
-    imageUrl: ''
+    imageUrl: '',
+    isActive: ''
   })
 
   const { id } = useParams()

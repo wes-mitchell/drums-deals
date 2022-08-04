@@ -108,7 +108,10 @@ namespace DrumDeals.Repositories
                         WHERE Id = @Id;
 
                         DELETE FROM UserFavorite
-                        WHERE ListingId = @Id";
+                        WHERE ListingId = @Id;
+
+                        DELETE FROM Offer
+                        WHERE ListingId = @id;";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
                     cmd.ExecuteNonQuery();
@@ -166,7 +169,9 @@ namespace DrumDeals.Repositories
                                 Email = DbUtils.GetString(reader, "Email"),
                                 IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive")),
                                 IsAdmin = reader.GetBoolean(reader.GetOrdinal("IsAdmin"))
-                            }
+                            },
+                            IsActive = reader.GetBoolean(reader.GetOrdinal("ListingActive")),
+                            PurchasePrice = reader.GetDecimal(reader.GetOrdinal("PurchasePrice"))
                         };
                     }
                     reader.Close();
