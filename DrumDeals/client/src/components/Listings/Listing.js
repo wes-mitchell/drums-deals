@@ -146,7 +146,7 @@ const displayFavorite = () => {
 
         </CardBody>
         
-        <CardBody className="">
+        <CardBody>
           <CardText className="my-2">
             <b>Condition:</b> {listing.condition} <br/>
             <b>Price:</b> ${listing.price} <br/>
