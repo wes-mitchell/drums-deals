@@ -59,7 +59,7 @@ CREATE TABLE [Offer] (
   [Id] int PRIMARY KEY IDENTITY(1, 1),
   [UserProfileId] int NOT NULL,
   [ListingId] int NOT NULL,
-  [OfferAmount] decimal NOT NULL,
+  [OfferAmount] decimal(38, 2) NOT NULL,
   [Accepted] bit NOT NULL DEFAULT (0)
 )
 GO

@@ -79,7 +79,7 @@ namespace DrumDeals.Repositories
                     cmd.CommandText = @"
                                         INSERT INTO Listing (Title, Condition, UserProfileId, Location, Description, Price, CategoryId, PublishDate, EndDate, ImageUrl)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Title, @Condition, @UserProfileId, @Location, @Description, @Price, @CategoryId, @PublishDate,                                  @EndDate, @ImageUrl)";
+                                        VALUES (@Title, @Condition, @UserProfileId, @Location, @Description, @Price, @CategoryId, @PublishDate, @EndDate, @ImageUrl)";
                     DbUtils.AddParameter(cmd, "@Title", listing.Title);
                     DbUtils.AddParameter(cmd, "@Condition", listing.Condition);
                     DbUtils.AddParameter(cmd, "@UserProfileId", listing.UserProfileId);

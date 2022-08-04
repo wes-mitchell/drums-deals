@@ -1,4 +1,4 @@
-﻿using DrumDeals.Models
+﻿using DrumDeals.Models;
 using System.Collections.Generic;
 
 namespace DrumDeals.Repositories
